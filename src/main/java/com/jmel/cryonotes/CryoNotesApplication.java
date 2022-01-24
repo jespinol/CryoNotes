@@ -1,4 +1,4 @@
-package com.jmel.demo;
+package com.jmel.cryonotes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
