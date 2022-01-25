@@ -1,17 +1,18 @@
 package com.jmel.cryonotes.controllers;
 
 import com.jmel.cryonotes.models.User;
-import com.jmel.cryonotes.repositories.UserRepository;
+import com.jmel.cryonotes.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Controller
-public class AppController {
+public class SignInUpController {
 
     @Autowired
     private UserRepository userRepository;
@@ -22,24 +23,28 @@ public class AppController {
     }
 
     @GetMapping("/register")
-    public String goToRegistrationForm(Model model) {
+    public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return ("registrationForm");
+
+        return "signup_form";
     }
 
     @PostMapping("/process_register")
-    public String processRegistration(User user) {
+    public String processRegister(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+
         userRepository.save(user);
-        return "registerSuccess";
+
+        return "register_success";
     }
 
-    @GetMapping("/login")
-    public String viewLoginPage() {
-        return "login";
+    @GetMapping("/home")
+    public String listUsers(Model model) {
+        List<User> listUsers = userRepository.findAll();
+        model.addAttribute("listUsers", listUsers);
+
+        return "home";
     }
-
-
 }

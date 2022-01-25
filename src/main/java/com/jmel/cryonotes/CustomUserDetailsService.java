@@ -1,5 +1,6 @@
+package com.jmel.cryonotes;
+
 import com.jmel.cryonotes.models.User;
-import com.jmel.cryonotes.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

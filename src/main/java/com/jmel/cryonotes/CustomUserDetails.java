@@ -1,3 +1,5 @@
+package com.jmel.cryonotes;
+
 import com.jmel.cryonotes.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
