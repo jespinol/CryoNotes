@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Samples</title>
+</head>
+<body>
+<div>
+    <h1>Create a new sample</h1>
+</div>
+<form th:action="@{/xxxxxx}" th:object="${xxxx}"
+      method="post">
+    <div>
+        <div>
+            <label>Sample name: </label>
+            <input type="text" th:field="*{xxxx}" required minlength="2" maxlength="20"/>
+        </div>
+        <div>
+            <label>Sample category: </label>
+            <input type="text" th:field="*{xxxx}" required minlength="2" maxlength="20" />
+        </div>
+        <div>
+            <label>Is complex? </label>
+            <input type="text" th:field="*{xxxx}" required minlength="2" maxlength="20" />
+        </div>
+        <div>
+            <label>Molecular weight (kDa): </label>
+            <input type="email" th:field="*{email}" required />
+        </div>
+        <div>
+            <label>Stoichiometry: </label>
+            <input type="password" th:field="*{xxxx}" required minlength="6" maxlength="10"/>
+        </div>
+        <div>
+            <label>Comments: </label>
+            <input type="password" th:field="*{xxxx}" required minlength="6" maxlength="10"/>
+        </div>
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>
