@@ -25,7 +25,6 @@ public class SignInUpController {
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-
         return "signup_form";
     }
 
@@ -34,17 +33,14 @@ public class SignInUpController {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-
         userRepository.save(user);
-
         return "register_success";
     }
 
     @GetMapping("/home")
     public String listUsers(Model model) {
-        List<User> listUsers = userRepository.findAll();
-        model.addAttribute("listUsers", listUsers);
-
+//        List<User> listUsers = userRepository.findAll();
+//        model.addAttribute("listUsers", listUsers);
         return "home";
     }
 }

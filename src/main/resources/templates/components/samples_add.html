@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Samples</title>
@@ -16,7 +16,7 @@
 <div>
     <h1>Create a new sample</h1>
 </div>
-<form th:action="@{/process_samples_add}" th:object="${sample}"
+<form th:action="@{/samples}" th:object="${sample}"
       method="post">
     <div>
         <div>
@@ -33,16 +33,16 @@
         </div>
         <div>
             <label>Is complex? </label>
-            <input type="text" th:field="*{isComplex}" required />
+            <input type="text" th:field="*{isComplex}" />
         </div>
 
         <div>
             <label>Stoichiometry: </label>
-            <input type="password" th:field="*{stoichiometry}" required/>
+            <input type="text" th:field="*{stoichiometry}" required/>
         </div>
         <div>
             <label>Comments: </label>
-            <input type="password" th:field="*{comments}" maxlength="512"/>
+            <input type="text" th:field="*{comments}" maxlength="512"/>
         </div>
         <div>
             <button type="submit">Save</button>

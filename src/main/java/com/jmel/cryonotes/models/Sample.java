@@ -17,13 +17,13 @@ public class Sample {
     private String sampleCategory;
 
     @Column
-    private double molecularWeight;
+    private String molecularWeight;
 
     @Column
-    private boolean isComplex;
+    private String isComplex;
 
     @Column
-    private int stoichiometry;
+    private String stoichiometry;
 
     @Column
     private String comments;
@@ -52,27 +52,27 @@ public class Sample {
         this.sampleCategory = sampleCategory;
     }
 
-    public double getMolecularWeight() {
+    public String getMolecularWeight() {
         return molecularWeight;
     }
 
-    public void setMolecularWeight(double molecularWeight) {
+    public void setMolecularWeight(String molecularWeight) {
         this.molecularWeight = molecularWeight;
     }
 
-    public boolean isComplex() {
+    public String getIsComplex() {
         return isComplex;
     }
 
-    public void setComplex(boolean complex) {
-        isComplex = complex;
+    public void setIsComplex(String isComplex) {
+        this.isComplex = isComplex;
     }
 
-    public int getStoichiometry() {
+    public String getStoichiometry() {
         return stoichiometry;
     }
 
-    public void setStoichiometry(int stoichiometry) {
+    public void setStoichiometry(String stoichiometry) {
         this.stoichiometry = stoichiometry;
     }
 
