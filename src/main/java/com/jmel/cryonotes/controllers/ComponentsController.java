@@ -13,11 +13,11 @@ public class ComponentsController {
         return "/components/samples_view";
     }
 
-    @GetMapping("/components/sample_add")
+    @GetMapping("/components/samples_add")
     public String addSamples(Model model) {
         model.addAttribute("sample", new Sample());
 
-        return "/comonents/sample_add";
+        return "/components/samples_add";
     }
 }
 
