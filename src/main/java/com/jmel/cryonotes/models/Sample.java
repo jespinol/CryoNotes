@@ -1,6 +1,7 @@
 package com.jmel.cryonotes.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "samples")

@@ -37,8 +37,6 @@ public class SignInUpController {
 
     @GetMapping("/home")
     public String listUsers(Model model) {
-//        List<User> listUsers = userRepository.findAll();
-//        model.addAttribute("listUsers", listUsers);
         return "home";
     }
 }

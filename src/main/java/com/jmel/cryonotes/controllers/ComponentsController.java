@@ -1,13 +1,13 @@
 package com.jmel.cryonotes.controllers;
 
-import com.jmel.cryonotes.models.data.SampleRepository;
+import com.jmel.cryonotes.SampleService;
 import com.jmel.cryonotes.models.Sample;
+import com.jmel.cryonotes.models.data.SampleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,12 +17,20 @@ public class ComponentsController {
 
     @Autowired
     private SampleRepository sampleRepository;
+    private SampleService sampleService;
 
     @GetMapping("/samples")
     public String viewSamples(Model model) {
         List<Sample> listSamples = sampleRepository.findAll();
         model.addAttribute("listSamples", listSamples);
         return "/components/samples_view";
+    }
+
+    @GetMapping("/samples/search")
+    public String viewSamples(Model model, @RequestParam(value="keyword") String keyword) {
+        List<Sample> listSamples = sampleService.listAll(keyword);
+        model.addAttribute("listSamples", listSamples);
+        return viewSamples(model);
     }
 
     @GetMapping("/samples/add")
