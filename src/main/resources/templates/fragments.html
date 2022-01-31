@@ -24,7 +24,32 @@
                 <input type="submit" value="Sign Out" />
             </p>
         </form>
-        <a th:href="@{/home}">Home</a>
+    </div>
+</div>
+
+<div th:fragment="navigation-sidebar">
+    <div>
+        <div>
+            <a th:href="@{/home}">Home</a>
+        </div>
+        <div>
+            <span>Components</span>
+        </div>
+        <ul>
+            <li><a th:href="@{/samples}">Samples</a></li>
+            <li><a href="#">Microscopes</a></li>
+            <li><a href="#">Grids</a></li>
+        </ul>
+        <div>
+            <span>Experiments</span>
+        </div>
+        <ul>
+            <li><a th:href="@{/screenings}">Screenings</a></li>
+            <li><a href="#">Data collection</a></li>
+            <li><a href="#">Data processing</a></li>
+            <li><a href="#">Refinement</a></li>
+            <li><a href="#">Validation</a></li>
+        </ul>
     </div>
 </div>
 
