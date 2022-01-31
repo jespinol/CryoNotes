@@ -1,20 +1,21 @@
 package com.jmel.cryonotes;
 
 import com.jmel.cryonotes.models.Sample;
+import com.jmel.cryonotes.models.Screening;
 import com.jmel.cryonotes.models.data.SampleRepository;
+import com.jmel.cryonotes.models.data.ScreeningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SampleService {
+public class ScreeningService {
     @Autowired
-    private SampleRepository sampleRepository;
+    private ScreeningRepository screeningRepository;
 
-    public List<Sample> getSamplesMatching(String keyword) {
+    public List<Screening> getScreeningsMatching(String keyword) {
         // TODO make keyword nonnullable
-        return sampleRepository.search(keyword);
+        return screeningRepository.search(keyword);
     }
 }

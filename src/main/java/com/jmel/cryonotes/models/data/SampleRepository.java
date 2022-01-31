@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface SampleRepository extends JpaRepository<Sample, Long> {
-    @Query("SELECT s FROM Sample s WHERE s.comments LIKE %:keyword%")
-    public List<Sample> search(String keyword);
+    @Query("SELECT s FROM Sample s WHERE CONCAT(s.sampleName, s.sampleCategory, s.molecularWeight, s.isComplex, s.stoichiometry) LIKE CONCAT('%',:keyword,'%')")
+    public List<Sample> search(@Param("keyword") String keyword);
 }

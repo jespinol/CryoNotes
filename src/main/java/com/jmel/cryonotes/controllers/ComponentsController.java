@@ -4,7 +4,6 @@ import com.jmel.cryonotes.SampleService;
 import com.jmel.cryonotes.models.Sample;
 import com.jmel.cryonotes.models.data.SampleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +16,8 @@ public class ComponentsController {
 
     @Autowired
     private SampleRepository sampleRepository;
+
+    @Autowired
     private SampleService sampleService;
 
     @GetMapping("/samples")
@@ -28,9 +29,9 @@ public class ComponentsController {
 
     @GetMapping("/samples/search")
     public String viewSamples(Model model, @RequestParam(value="keyword") String keyword) {
-        List<Sample> listSamples = sampleService.listAll(keyword);
+        List<Sample> listSamples = sampleService.getSamplesMatching(keyword);
         model.addAttribute("listSamples", listSamples);
-        return viewSamples(model);
+        return "/components/samples_view";
     }
 
     @GetMapping("/samples/add")

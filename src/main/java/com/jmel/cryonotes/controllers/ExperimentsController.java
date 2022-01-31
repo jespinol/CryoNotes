@@ -1,5 +1,6 @@
 package com.jmel.cryonotes.controllers;
 
+import com.jmel.cryonotes.ScreeningService;
 import com.jmel.cryonotes.models.Sample;
 import com.jmel.cryonotes.models.data.ScreeningRepository;
 import com.jmel.cryonotes.models.Screening;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,9 +21,19 @@ public class ExperimentsController {
     @Autowired
     private ScreeningRepository screeningRepository;
 
+    @Autowired
+    private ScreeningService screeningService;
+
     @GetMapping("/screenings")
     public String vieScreenings(Model model) {
         List<Screening> listScreenings = screeningRepository.findAll();
+        model.addAttribute("listScreenings", listScreenings);
+        return "/experiments/screenings_view";
+    }
+
+    @GetMapping("/screenings/search")
+    public String viewScreenings(Model model, @RequestParam(value="keyword") String keyword) {
+        List<Screening> listScreenings = screeningService.getScreeningsMatching(keyword);
         model.addAttribute("listScreenings", listScreenings);
         return "/experiments/screenings_view";
     }

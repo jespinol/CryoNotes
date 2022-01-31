@@ -53,12 +53,19 @@
     </div>
 </div>
 
-<!--<div th:fragment="search-bar">-->
-<!--    <form th:action="@{/samples/search}" method="get">-->
-<!--        Search: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" />-->
-<!--        <input type="submit" value="Search" />-->
-<!--    </form>-->
-<!--</div>-->
+<div th:fragment="search-bar">
+    <form th:action="@{/samples/search}" method="get">
+        Search: <input required type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" />
+        <input type="submit" value="Search" />
+    </form>
+</div>
+
+<div th:fragment="search-bar-screenings">
+    <form th:action="@{/screenings/search}" method="get">
+        Search: <input required type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" />
+        <input type="submit" value="Search" />
+    </form>
+</div>
 
 </body>
 </html>
