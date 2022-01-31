@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+    <title>CryoNotes</title>
+</head>
+<body>
+<div th:fragment="page-header">
+    <div>
+        <div >
+            <a th:href="@{/home}" class="navbar-brand">Home</a>
+        </div>
+        <div>
+            <div>
+                <form th:action="@{/logout}" method="post">
+                    <p>
+                        Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+                        <input type="submit" value="Sign Out" />
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
