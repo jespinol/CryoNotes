@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div th:replace="fragments :: page-header"></div>
+    <div>
+        <h1>Sample</h1>
+    </div>
+    <div>
+        <p th:text="${'Sample name: ' + individualSample.sampleName}"></p>
+        <p th:text="${'Sample category: ' + individualSample.sampleCategory}"></p>
+        <p th:text="${'Molecular weight (kDa): ' + individualSample.molecularWeight}"></p>
+        <p th:text="${'Is it a complex? ' + individualSample.isComplex}"></p>
+        <p th:text="${'Stoichiometry: ' + individualSample.stoichiometry}"></p>
+        <p th:text="${'Comments ' + individualSample.comments}"></p>
+    </div>
+</div>
+</body>
+</html>

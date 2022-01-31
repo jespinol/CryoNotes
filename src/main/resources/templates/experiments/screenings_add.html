@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Samples</title>
+</head>
+<body>
+<div th:replace="fragments :: page-header"></div>
+<div>
+    <h1>Create a new sample</h1>
+</div>
+<form th:action="@{/screenings}" th:object="${screening}"
+      method="post">
+    <div>
+        <div>
+            <label>Sample name: </label>
+            <input type="text" th:field="*{sampleName}" required/>
+        </div>
+        <div>
+            <label>Sample category: </label>
+            <input type="text" th:field="*{sampleCategory}" required/>
+        </div>
+        <div>
+            <label>Microscope: </label>
+            <input type="text" th:field="*{microscope}" required />
+        </div>
+        <div>
+            <label>Vitrification notes: </label>
+            <input type="text" th:field="*{vitrification}" />
+        </div>
+
+        <div>
+            <label>Pixel size (Å): </label>
+            <input type="text" th:field="*{pixelSize}" required/>
+        </div>
+        <div>
+            <label>Was there data collection? </label>
+            <input type="text" th:field="*{collected}"/>
+        </div>
+        <div>
+            <label>Collection time: </label>
+            <input type="text" th:field="*{collectionTime}"/>
+        </div>
+        <div>
+            <label>Number of micrographs: </label>
+            <input type="text" th:field="*{numMicrographs}"/>
+        </div>
+        <div>
+            <label>Were grids stored? </label>
+            <input type="text" th:field="*{storage}"/>
+        </div>
+        <div>
+            <label>Other comments </label>
+            <input type="text" th:field="*{comments}"/>
+        </div>
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

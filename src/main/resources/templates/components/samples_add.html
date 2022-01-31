@@ -5,14 +5,7 @@
     <title>Samples</title>
 </head>
 <body>
-<div>
-    <form th:action="@{/logout}" method="post">
-        <p>
-            Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-        </p>
-        <input type="submit" value="Sign Out" />
-    </form>
-</div>
+<div th:replace="fragments :: page-header"></div>
 <div>
     <h1>Create a new sample</h1>
 </div>

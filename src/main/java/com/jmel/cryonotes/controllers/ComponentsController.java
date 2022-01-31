@@ -1,14 +1,16 @@
 package com.jmel.cryonotes.controllers;
 
-import com.jmel.cryonotes.SampleRepository;
+import com.jmel.cryonotes.models.data.SampleRepository;
 import com.jmel.cryonotes.models.Sample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ComponentsController {
@@ -33,6 +35,14 @@ public class ComponentsController {
     public String processSample(Sample sample, Model model) {
         sampleRepository.save(sample);
         return viewSamples(model);
+    }
+
+    @GetMapping("/sample/{sampleId}")
+    public String viewSingleSample(Model model, @PathVariable Long sampleId) {
+        Optional optSample = sampleRepository.findById(sampleId);
+        Sample individualSample = (Sample) optSample.get();
+        model.addAttribute("individualSample", individualSample);
+        return ("/components/sample_view");
     }
 }
 

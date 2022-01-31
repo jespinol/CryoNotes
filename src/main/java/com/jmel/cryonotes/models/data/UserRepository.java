@@ -1,4 +1,4 @@
-package com.jmel.cryonotes;
+package com.jmel.cryonotes.models.data;
 
 import com.jmel.cryonotes.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;

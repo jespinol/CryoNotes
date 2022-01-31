@@ -6,14 +6,7 @@
 </head>
 <body>
 <div>
-    <div>
-        <form th:action="@{/logout}" method="post">
-            <p>
-                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-            </p>
-            <input type="submit" value="Sign Out" />
-        </form>
-    </div>
+    <div th:replace="fragments :: page-header"></div>
     <div>
         <h1>Samples</h1>
     </div>
@@ -34,12 +27,11 @@
             </thead>
             <tbody>
             <tr th:each="sample: ${listSamples}">
-                <td th:text="${sample.sampleName}">Name</td>
+                <td><a th:href="@{'/sample/' + ${sample.id}}" th:text="${sample.sampleName}">Name</a></td>
                 <td th:text="${sample.sampleCategory}">Category</td>
                 <td th:text="${sample.molecularWeight}">M.W. (kDa)</td>
                 <td th:text="${sample.isComplex}">Complex</td>
                 <td th:text="${sample.stoichiometry}">Stoichiometry</td>
-                <td th:text="${sample.comments}">Comments</td>
             </tr>
             </tbody>
         </table>

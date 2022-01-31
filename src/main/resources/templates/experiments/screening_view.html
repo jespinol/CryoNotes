@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div th:replace="fragments :: page-header"></div>
+    <div>
+        <h1>Screening</h1>
+    </div>
+    <div>
+        <p th:text="${'Sample name: ' + individualScreening.sampleName}"></p>
+        <p th:text="${'Sample category: ' + individualScreening.sampleCategory}"></p>
+        <p th:text="${'Microscope: ' + individualScreening.microscope}"></p>
+        <p th:text="${'vitrification comments: ' + individualScreening.vitrification}"></p>
+        <p th:text="${'Pixel size: ' + individualScreening.pixelSize}"></p>
+        <p th:text="${'Result: ' + individualScreening.result}"></p>
+        <p th:text="${'Was data collected? ' + individualScreening.collected}"></p>
+        <p th:text="${'Collection time: ' + individualScreening.collectionTime}"></p>
+        <p th:text="${'Number of micrographs: ' + individualScreening.numMicrographs}"></p>
+        <p th:text="${'Storage comments: ' + individualScreening.storage}"></p>
+        <p th:text="${'Additional comments: ' + individualScreening.comments}"></p>
+    </div>
+</div>
+</body>
+</html>
