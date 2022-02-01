@@ -1,23 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <meta charset="ISO-8859-1">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
   <title>CryoNotes</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div th:replace="fragments :: page-header-home"></div>
-<div>
-  <div>
-    <h1>Home</h1>
-    <div>
-      <h2>Components</h2>
-      <h3><a th:href="@{/samples}">Samples</a></h3>
-    </div>
-    <div>
-      <h2>Experiments</h2>
-      <h3><a th:href="@{/screenings}">Screening sessions</a></h3>
-    </div>
+<body>
+  <div th:replace="fragments :: page-header"></div>
 
-  </div>
+  <div>
+    <div>
+      <h1>Home</h1>
+      <div>
+        <h2>Components</h2>
+        <h3><a th:href="@{/samples}">Samples</a></h3>
+      </div>
+      <div>
+        <h2>Experiments</h2>
+        <h3><a th:href="@{/screenings}">Screening sessions</a></h3>
+      </div>
+
+    </div>
 </div>
+  <div th:replace="fragments :: page-footer"></div>
 </body>
 </html>
