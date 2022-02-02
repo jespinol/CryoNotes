@@ -10,38 +10,40 @@
 <body>
 <div>
     <div th:replace="fragments :: page-header"></div>
-<!--    <div th:replace="fragments :: navigation-sidebar"></div>-->
-    <div>
-        <h1>Samples</h1>
+
+    <div class="d-flex">
+        <div class="p-2">
+            <h2>Samples</h2>
+        </div>
+        <div class="ms-auto p-2">
+            <a th:href="@{/samples/add}"><input class="btn btn-secondary navbar-btn btn-sm" type="submit" value="Add new"/></a>
+        </div>
     </div>
-    <div>
-        <div th:replace="fragments :: search-bar"></div>
-    </div>
-    <div>
-        <h3><a th:href="@{/samples/add}">Add new sample</a></h3>
-    </div>
-    <div>
-        <table>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>M.W. (kDa)</th>
-                <th>Complex</th>
-                <th>Stoichiometry</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">M.W. (kDa)</th>
+                <th scope="col">Complex</th>
+                <th scope="col">Stoichiometry</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="sample: ${listSamples}">
-                <td><a th:href="@{'/sample/' + ${sample.id}}" th:text="${sample.sampleName}">Name</a></td>
-                <td th:text="${sample.sampleCategory}">Category</td>
-                <td th:text="${sample.molecularWeight}">M.W. (kDa)</td>
-                <td th:text="${sample.isComplex}">Complex</td>
-                <td th:text="${sample.stoichiometry}">Stoichiometry</td>
+            <tr scope="row" th:each="sample: ${listSamples}">
+                <td><a th:href="@{'/sample/' + ${sample.id}}" th:text="${sample.sampleName}" style="color:blue"></a></td>
+                <td th:text="${sample.sampleCategory}"></td>
+                <td th:text="${sample.molecularWeight}"></td>
+                <td th:text="${sample.isComplex}"></td>
+                <td th:text="${sample.stoichiometry}"></td>
             </tr>
             </tbody>
         </table>
     </div>
+
+    <div th:replace="fragments :: page-footer"></div>
 </div>
 </body>
 </html>

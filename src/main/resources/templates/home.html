@@ -8,23 +8,102 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<body>
+
   <div th:replace="fragments :: page-header"></div>
 
-  <div>
+  <div style="margin-top: 20px; margin-left: 50px; margin-right: 50px">
+    <h2>Home</h2>
+    <br>
     <div>
-      <h1>Home</h1>
-      <div>
-        <h2>Components</h2>
-        <h3><a th:href="@{/samples}">Samples</a></h3>
-      </div>
-      <div>
-        <h2>Experiments</h2>
-        <h3><a th:href="@{/screenings}">Screening sessions</a></h3>
-      </div>
+      <h3>Components</h3>
+        <div class="row justify-content-start">
 
+          <div class="card mx-2 mb-3" style="width: 18rem;">
+            <a th:href="@{/samples}">
+              <img class="card-img-top" src="https://www.w3schools.com/images/picture.jpg" alt="Samples">
+            </a>
+            <div class="card-body">
+              <p class="card-text">Description of samples</p>
+            </div>
+          </div>
+
+          <div class="card mx-2 mb-3" style="width: 18rem;">
+            <a th:href="@{/samples}">
+              <img class="card-img-top" src="https://www.w3schools.com/images/picture.jpg" alt="Samples">
+            </a>
+            <div class="card-body">
+              <p class="card-text">Description of microscopes</p>
+            </div>
+          </div>
+
+          <div class="card mx-2 mb-3" style="width: 18rem;">
+            <a th:href="@{/samples}">
+              <img class="card-img-top" src="images/temp.jpg" alt="Samples">
+            </a>
+            <div class="card-body">
+              <p class="card-text">Description of grids</p>
+            </div>
+          </div>
+
+        </div>
     </div>
-</div>
+    <br>
+    <div>
+      <h3>Experiments</h3>
+
+      <div class="row justify-content-start">
+
+        <div class="card mx-2 mb-3" style="width: 18rem;">
+          <a th:href="@{/screenings}">
+            <img class="card-img-top" src="https://www.w3schools.com/images/picture.jpg" alt="Samples">
+          </a>
+          <div class="card-body">
+            <p class="card-text">Description of screenings</p>
+          </div>
+        </div>
+
+        <div class="card mx-2 mb-3" style="width: 18rem;">
+          <a th:href="@{/screenings}">
+            <img class="card-img-top" src="https://www.w3schools.com/images/picture.jpg" alt="Samples">
+          </a>
+          <div class="card-body">
+            <p class="card-text">Description of data collection</p>
+          </div>
+        </div>
+
+        <div class="card mx-2 mb-3" style="width: 18rem;">
+          <a th:href="@{/screenings}">
+            <img class="card-img-top" src="images/temp.jpg" alt="Samples">
+          </a>
+          <div class="card-body">
+            <p class="card-text">Description of data processing</p>
+          </div>
+        </div>
+
+        <div class="card mx-2 mb-3" style="width: 18rem;">
+          <a th:href="@{/screenings}">
+            <img class="card-img-top" src="images/temp.jpg" alt="Samples">
+          </a>
+          <div class="card-body">
+            <p class="card-text">Description of refinement</p>
+          </div>
+        </div>
+
+        <div class="card mx-2 mb-3" style="width: 18rem;">
+          <a th:href="@{/screenings}">
+            <img class="card-img-top" src="images/temp.jpg" alt="Samples">
+          </a>
+          <div class="card-body">
+            <p class="card-text">Description of validation</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
   <div th:replace="fragments :: page-footer"></div>
+
 </body>
 </html>
