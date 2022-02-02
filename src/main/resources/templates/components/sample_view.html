@@ -8,21 +8,53 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div>
-    <div th:replace="fragments :: page-header"></div>
-<!--    <div th:replace="fragments :: navigation-sidebar"></div>-->
-    <div>
-        <h1>Sample</h1>
+<div th:replace="fragments :: page-header"></div>
+
+<div style="margin-top: 60px; margin-bottom: 50px; margin-left: 50px; margin-right: 50px">
+    <div class="d-flex">
+        <div>
+            <h2>Sample</h2>
+        </div>
     </div>
 
-    <div>
-        <p th:text="${'Sample name: ' + individualSample.sampleName}"></p>
-        <p th:text="${'Sample category: ' + individualSample.sampleCategory}"></p>
-        <p th:text="${'Molecular weight (kDa): ' + individualSample.molecularWeight}"></p>
-        <p th:text="${'Is it a complex? ' + individualSample.isComplex}"></p>
-        <p th:text="${'Stoichiometry: ' + individualSample.stoichiometry}"></p>
-        <p th:text="${'Comments ' + individualSample.comments}"></p>
-    </div>
+    <form>
+        <fieldset disabled>
+            <div class="mb-3">
+                <label class="form-label">Created by</label>
+                <input type="text" class="form-control" value="test">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input type="date" class="form-control" value="test">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Sample name</label>
+                <input type="text" class="form-control" th:value="${individualSample.sampleName}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Sample category</label>
+                <input type="text" class="form-control" th:value="${individualSample.sampleCategory}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Molecular weight (kDa)</label>
+                <input type="text" class="form-control" th:value="${individualSample.molecularWeight}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Is it a complex?</label>
+                <input type="text" class="form-control" th:value="${individualSample.isComplex}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Stoichiometry</label>
+                <input type="text" class="form-control" th:value="${individualSample.stoichiometry}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Comments</label>
+                <textarea type="text" class="form-control form-control-lg mb-2" th:value="${individualSample.comments}"></textarea>
+            </div>
+        </fieldset>
+    </form>
 </div>
+
+<div th:replace="fragments :: page-footer"></div>
 </body>
 </html>

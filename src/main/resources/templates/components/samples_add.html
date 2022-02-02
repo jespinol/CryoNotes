@@ -9,42 +9,55 @@
 </head>
 <body>
 <div th:replace="fragments :: page-header"></div>
-<!--<div th:replace="fragments :: navigation-sidebar"></div>-->
-<div>
-    <h1>Create a new sample</h1>
-</div>
-<form th:action="@{/samples}" th:object="${sample}"
-      method="post">
-    <div>
+
+<div style="margin-top: 60px; margin-bottom: 50px; margin-left: 50px; margin-right: 50px">
+    <div class="d-flex">
         <div>
-            <label>Sample name: </label>
-            <input type="text" th:field="*{sampleName}" required/>
+            <h2>Create a new sample</h2>
         </div>
-        <div>
-            <label>Sample category: </label>
-            <input type="text" th:field="*{sampleCategory}" required/>
+    </div>
+
+    <form th:action="@{/samples}" th:object="${sample}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Created by</label>
+            <input type="text" class="form-control" id="usernameForm">
+            <script>document.getElementById('usernameForm').value = '[[${#request.userPrincipal.principal.fullName}]]';</script>
         </div>
-        <div>
-            <label>Molecular weight (kDa): </label>
-            <input type="text" th:field="*{molecularWeight}" required />
+        <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control">
         </div>
-        <div>
-            <label>Is complex? </label>
-            <input type="text" th:field="*{isComplex}" />
+        <div class="mb-3">
+            <label class="form-label">Sample name</label>
+            <input type="text" class="form-control" th:field="*{sampleName}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Sample category</label>
+            <input type="text" class="form-control" th:field="*{sampleCategory}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Molecular weight (kDa)</label>
+            <input type="text" class="form-control" th:field="*{molecularWeight}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Is it a complex?</label>
+            <input type="text" class="form-control" th:field="*{isComplex}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Stoichiometry</label>
+            <input type="text" class="form-control" th:field="*{stoichiometry}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Comments</label>
+            <textarea type="text" class="form-control" th:field="*{comments}"></textarea>
         </div>
 
         <div>
-            <label>Stoichiometry: </label>
-            <input type="text" th:field="*{stoichiometry}" required/>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
-        <div>
-            <label>Comments: </label>
-            <input type="text" th:field="*{comments}" maxlength="512"/>
-        </div>
-        <div>
-            <button type="submit">Save</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
+
+<div th:replace="fragments :: page-footer"></div>
 </body>
 </html>

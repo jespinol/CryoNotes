@@ -9,66 +9,74 @@
 </head>
 <body>
 
-    <div th:fragment="page-header">
-        <nav class="navbar navbar-expand-sm navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" th:href="@{/home}"><b>CryoNotes</b></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<div th:fragment="page-header">
+    <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/home}"><b>CryoNotes</b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03"
+                    aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarsExample03">
-                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-bs-toggle="dropdown" aria-expanded="false">Components</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdown03">
-                                <li><a class="dropdown-item" th:href="@{/samples}">Samples</a></li>
-                                <li><a class="dropdown-item" href="#">Microscopes</a></li>
-                                <li><a class="dropdown-item" href="#">Grids</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown2" data-bs-toggle="dropdown" aria-expanded="false">Experiments</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdown03">
-                                <li><a class="dropdown-item" th:href="@{/screenings}">Screenings</a></li>
-                                <li><a class="dropdown-item" href="#">Data collection</a></li>
-                                <li><a class="dropdown-item" href="#">Data processing</a></li>
-                                <li><a class="dropdown-item" href="#">Refinement</a></li>
-                                <li><a class="dropdown-item" href="#">Validation</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form>
-                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                    </form>
-                </div>
+            <div class="collapse navbar-collapse" id="navbarsExample03">
+                <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-bs-toggle="dropdown"
+                           aria-expanded="false">Components</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                            <li><a class="dropdown-item" th:href="@{/samples}">Samples</a></li>
+                            <li><a class="dropdown-item" href="#">Microscopes</a></li>
+                            <li><a class="dropdown-item" href="#">Grids</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown2" data-bs-toggle="dropdown"
+                           aria-expanded="false">Experiments</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                            <li><a class="dropdown-item" th:href="@{/screenings}">Screenings</a></li>
+                            <li><a class="dropdown-item" href="#">Data collection</a></li>
+                            <li><a class="dropdown-item" href="#">Data processing</a></li>
+                            <li><a class="dropdown-item" href="#">Refinement</a></li>
+                            <li><a class="dropdown-item" href="#">Validation</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form>
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
+</div>
 
-    <div th:fragment="page-footer">
-        <nav class="navbar fixed-bottom navbar-light bg-light py-0">
-            <div class="container-fluid">
-                <form th:action="@{/logout}" method="post" class="navbar-text"> Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b> &nbsp;
+<div th:fragment="page-footer">
+    <nav class="navbar fixed-bottom navbar-light bg-light py-0">
+        <div class="container-fluid d-flex">
+            <div class="navbar-text">
+                Created by <a href="https://github.com/jespinol?tab=repositories" target="_blank" rel="noreferrer"
+                              style="text-decoration: none">Jose M. Espinola-Lopez</a>
+            </div>
+            <div>
+                <form th:action="@{/logout}" method="post" class="navbar-text"> Welcome, <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+                    &nbsp;
                     <input class="btn btn-secondary navbar-btn btn-sm" type="submit" value="Sign Out"/>
                 </form>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
+</div>
 
-
-
-    <div th:fragment="search-bar">
+<div th:fragment="search-bar">
     <form th:action="@{/samples/search}" method="get">
-        Search: <input required type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" />
-        <input type="submit" value="Search" />
+        Search: <input required type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"/>
+        <input type="submit" value="Search"/>
     </form>
 </div>
 
-    <div th:fragment="search-bar-screenings">
+<div th:fragment="search-bar-screenings">
     <form th:action="@{/screenings/search}" method="get">
-        Search: <input required type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" />
-        <input type="submit" value="Search" />
+        Search: <input required type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"/>
+        <input type="submit" value="Search"/>
     </form>
 </div>
 
