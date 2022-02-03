@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .card-link {
+            color: black;
+            text-decoration: none !important;
+        }
+
+    </style>
 </head>
 <body>
 <div th:replace="fragments :: page-header"></div>
@@ -22,96 +29,89 @@
         <div class="row justify-content-start">
 
             <div class="card mx-2 mb-3" style="width: 18rem;">
-                <a th:href="@{/samples}">
-                    <img class="card-img-top" th:src="@{images/temp.jpg}" alt="Samples">
+                <a th:href="@{/samples}" class="card-link">
+                    <img class="card-img-top" th:src="@{images/home/temp.jpg}" alt="Samples">
+                    <div class="card-body">
+                        <h5 class="card-title">Samples</h5>
+                    </div>
                 </a>
-                <div class="card-body">
-                    <h5 class="card-title">Samples</h5>
-                    <p class="card-text">Description of samples</p>
-                </div>
             </div>
 
             <div class="card mx-2 mb-3" style="width: 18rem;">
-                <a th:href="@{/samples}">
-                    <img class="card-img-top" th:src="@{images/temp.jpg}" alt="Samples">
+                <a th:href="@{/samples}" class="card-link">
+                    <img class="card-img-top" th:src="@{images/home/temp.jpg}" alt="Samples">
+                    <div class="card-body">
+                        <h5 class="card-title">Microscopes</h5>
+                    </div>
                 </a>
-                <div class="card-body">
-                    <h5 class="card-title">Microscopes</h5>
-                    <p class="card-text">Description of microscopes</p>
-                </div>
             </div>
 
             <div class="card mx-2 mb-3" style="width: 18rem;">
-                <a th:href="@{/samples}">
-                    <img class="card-img-top" th:src="@{images/temp.jpg}" alt="Samples">
+                <a th:href="@{/samples}" class="card-link">
+                    <img class="card-img-top" th:src="@{images/home/temp.jpg}" alt="Samples">
+                    <div class="card-body">
+                        <h5 class="card-title">Grids</h5>
+                    </div>
                 </a>
-                <div class="card-body">
-                    <h5 class="card-title">Grids</h5>
-                    <p class="card-text">Description of grids</p>
-                </div>
             </div>
-
         </div>
-    </div>
-    <br>
-    <div>
-        <h3>Experiments</h3>
 
-        <div class="row justify-content-start">
+        <br>
 
-            <div class="card mx-2 mb-3" style="width: 18rem;">
-                <a th:href="@{/screenings}">
-                    <img class="card-img-top" th:src="@{images/temp.jpg}" alt="Samples">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">Screenings</h5>
-                    <p class="card-text">Description of screenings</p>
+        <div>
+            <h3>Experiments</h3>
+
+            <div class="row justify-content-start">
+
+                <div class="card mx-2 mb-3" style="width: 18rem;">
+                    <a th:href="@{/screenings}" class="card-link">
+                        <img class="card-img-top" th:src="@{images/home/temp.jpg}" alt="Samples">
+                        <div class="card-body">
+                            <h5 class="card-title">Screenings</h5>
+                        </div>
+                    </a>
                 </div>
-            </div>
 
-            <div class="card mx-2 mb-3" style="width: 18rem;">
-                <a th:href="@{/screenings}">
-                    <img class="card-img-top" th:src="@{images/temp.jpg}" alt="Samples">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">Hi-res data collection</h5>
-                    <p class="card-text">Description of data collection</p>
+                <div class="card mx-2 mb-3" style="width: 18rem;">
+                    <a th:href="@{/screenings}" class="card-link">
+                        <img class="card-img-top" th:src="@{images/home/temp.jpg}" alt="Samples">
+                        <div class="card-body">
+                            <h5 class="card-title">Hi-res data collection</h5>
+                        </div>
+                    </a>
                 </div>
-            </div>
 
-            <div class="card mx-2 mb-3" style="width: 18rem;">
-                <a th:href="@{/screenings}">
-                    <img class="card-img-top" th:src="@{images/temp.jpg}" alt="Samples">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">Data processing</h5>
-                    <p class="card-text">Description of data processing</p>
+                <div class="card mx-2 mb-3" style="width: 18rem;">
+                    <a th:href="@{/screenings}" class="card-link">
+                        <img class="card-img-top" th:src="@{images/home/temp.jpg}" alt="Samples">
+                        <div class="card-body">
+                            <h5 class="card-title">Data processing</h5>
+                        </div>
+                    </a>
                 </div>
-            </div>
 
-            <div class="card mx-2 mb-3" style="width: 18rem;">
-                <a th:href="@{/screenings}">
-                    <img class="card-img-top" th:src="@{images/temp.jpg}" alt="Samples">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">Refinement</h5>
-                    <p class="card-text">Description of refinement</p>
+                <div class="card mx-2 mb-3" style="width: 18rem;">
+                    <a th:href="@{/screenings}" class="card-link">
+                        <img class="card-img-top" th:src="@{images/home/temp.jpg}" alt="Samples">
+                        <div class="card-body">
+                            <h5 class="card-title">Refinement</h5>
+                        </div>
+                    </a>
                 </div>
-            </div>
 
-            <div class="card mx-2 mb-3" style="width: 18rem;">
-                <a th:href="@{/screenings}">
-                    <img class="card-img-top" th:src="@{images/temp.jpg}" alt="Samples">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">Model validation</h5>
-                    <p class="card-text">Description of validation</p>
+                <div class="card mx-2 mb-3" style="width: 18rem;">
+                    <a th:href="@{/screenings}" class="card-link">
+                        <img class="card-img-top" th:src="@{images/home/temp.jpg}" alt="Samples">
+                        <div class="card-body">
+                            <h5 class="card-title">Model validation</h5>
+                        </div>
+                    </a>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
 
+    </div>
 </div>
 
 <div th:replace="fragments :: page-footer"></div>

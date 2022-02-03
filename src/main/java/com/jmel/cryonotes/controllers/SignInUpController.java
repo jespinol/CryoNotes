@@ -16,14 +16,14 @@ public class SignInUpController {
     private UserRepository userRepository;
 
     @GetMapping("")
-    public String viewHomePage() {
-        return "index";
+    public String viewStartPage() {
+        return "login/index";
     }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "signup_form";
+        return "login/signup_form";
     }
 
     @PostMapping("/process_register")
@@ -32,11 +32,11 @@ public class SignInUpController {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userRepository.save(user);
-        return "register_success";
+        return "login/register_success";
     }
 
     @GetMapping("/home")
     public String listUsers(Model model) {
-        return "home";
+        return "/home";
     }
 }

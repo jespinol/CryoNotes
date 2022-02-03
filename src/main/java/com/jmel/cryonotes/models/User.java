@@ -1,6 +1,7 @@
 package com.jmel.cryonotes.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
