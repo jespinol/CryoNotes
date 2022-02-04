@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +42,7 @@ public class ComponentsController {
     }
 
     @PostMapping("/samples")
-    public String processSample(Sample sample, Model model) {
+    public String processSample(@Valid Sample sample, Model model) {
         sampleRepository.save(sample);
         return viewSamples(model);
     }

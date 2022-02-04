@@ -32,7 +32,7 @@ public class SignInUpController {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userRepository.save(user);
-        return "login/register_success";
+        return "login/index";
     }
 
     @GetMapping("/home")

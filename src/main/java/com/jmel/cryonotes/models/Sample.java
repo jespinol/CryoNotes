@@ -1,6 +1,7 @@
 package com.jmel.cryonotes.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "samples")
@@ -11,13 +12,23 @@ public class Sample {
     private Long id;
 
     @Column
+    @NotNull
+    private String date;
+
+    @Column
+    @NotNull
     private String sampleName;
 
     @Column
+    @NotNull
     private String sampleCategory;
 
     @Column
-    private String molecularWeight;
+    @NotNull
+    private String creator;
+
+    @Column
+    private int molecularWeight;
 
     @Column
     private String isComplex;
@@ -52,11 +63,11 @@ public class Sample {
         this.sampleCategory = sampleCategory;
     }
 
-    public String getMolecularWeight() {
+    public int getMolecularWeight() {
         return molecularWeight;
     }
 
-    public void setMolecularWeight(String molecularWeight) {
+    public void setMolecularWeight(int molecularWeight) {
         this.molecularWeight = molecularWeight;
     }
 
@@ -82,5 +93,21 @@ public class Sample {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

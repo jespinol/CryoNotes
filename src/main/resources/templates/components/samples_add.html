@@ -19,13 +19,8 @@
 
     <form th:action="@{/samples}" th:object="${sample}" method="post">
         <div class="mb-3">
-            <label class="form-label">Created by</label>
-            <input type="text" class="form-control" id="usernameForm">
-            <script>document.getElementById('usernameForm').value = '[[${#request.userPrincipal.principal.fullName}]]';</script>
-        </div>
-        <div class="mb-3">
             <label class="form-label">Date</label>
-            <input type="date" class="form-control">
+            <input type="date" class="form-control" th:field="*{date}" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Sample name</label>
@@ -36,8 +31,14 @@
             <input type="text" class="form-control" th:field="*{sampleCategory}" required>
         </div>
         <div class="mb-3">
+            <label class="form-label">Created by</label>
+            <input type="text" class="form-control" id="usernameForm" th:field="*{creator}">
+            <script>document.getElementById('usernameForm').value = '[[${#request.userPrincipal.principal.fullName}]]';</script>
+        </div>
+        <div class="mb-3">
             <label class="form-label">Molecular weight (kDa)</label>
-            <input type="text" class="form-control" th:field="*{molecularWeight}" required>
+            <input type="text" class="form-control" th:field="*{molecularWeight}">
+            <p th:if="${#fields.hasErrors('molecularWeight')}" th:errors="*{molecularWeight}"></p>
         </div>
         <div class="mb-3">
             <label class="form-label">Is it a complex?</label>

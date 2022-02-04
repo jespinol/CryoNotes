@@ -1,15 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>CryoNotes Error</title>
+    <title>Error</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+        .h-custom {
+            height: 100%;
+        }
+        @media (max-width: 450px) {
+            .h-custom {
+            height: 100%;
+            }
+        }
+
+    </style>
 </head>
 <body>
-<body>
-<h1>There was an error</h1>
-<h3><a th:href="@{/}">Go back to start page</a></h3>
+<section class="vh-100 bg-light">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div th:replace="fragments :: start-title-image"></div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <div class="justify-content-center text-center">
+                    <h2 class="text-danger">There was an error</h2>
+                    <br>
+                    <a href="#" onclick="javascript:window.history.back(-1);return false;" class="fs-3 text-decoration-none">Go back</a>
+                </div>
+<!--                <div>-->
+<!--                    <h5>Error details</h5>-->
+<!--                    <p th:text="${error}"></p>-->
+<!--                    <p th:text="${status}"></p>-->
+<!--                    <p th:text="${trace}"></p>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
