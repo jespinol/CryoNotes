@@ -1,6 +1,9 @@
 package com.jmel.cryonotes.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -11,16 +14,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 45)
+    @Column(unique = true)
+    @NotBlank
     private String email;
 
-    @Column(nullable = false, length = 64)
+    @Column
+    @NotBlank
+    @Size(min=6, max=64)
     private String password;
 
-    @Column(name = "first_name", nullable = false, length = 20)
+    @Column
+    @NotBlank
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 20)
+    @Column
+    @NotBlank
     private String lastName;
 
     public String getPassword() {

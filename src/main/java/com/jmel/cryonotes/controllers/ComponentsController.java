@@ -4,8 +4,12 @@ import com.jmel.cryonotes.SampleService;
 import com.jmel.cryonotes.models.Sample;
 import com.jmel.cryonotes.models.data.SampleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,8 +45,11 @@ public class ComponentsController {
         return "/components/samples_add";
     }
 
-    @PostMapping("/samples")
-    public String processSample(@Valid Sample sample, Model model) {
+    @PostMapping("/samples/save")
+    public String processSample(@Valid Sample sample, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "/components/samples_add";
+        }
         sampleRepository.save(sample);
         return viewSamples(model);
     }
