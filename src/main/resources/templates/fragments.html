@@ -68,12 +68,16 @@
 </div>
 
 <div th:fragment="start-title-image" class="col-md-9 col-lg-6 col-xl-5 text-center">
-    <h1>Project</h1>
+    <h1>CryoNotes</h1>
     <br>
     <a href="https://en.wikipedia.org/wiki/Nucleosome">
         <img th:src="@{/images/login/ncp.jpg}" class="rounded"
              alt="NCP image">
     </a>
+</div>
+
+<div th:fragment="go-back">
+    <h6><a href="#" onclick="javascript:window.history.back(-1);return false;" class="text-decoration-none">&#8592; Go back</a></h6>
 </div>
 
 <div th:fragment="search-bar">

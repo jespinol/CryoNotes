@@ -11,21 +11,17 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div style="margin-top: 60px; margin-bottom: 50px; margin-left: 50px; margin-right: 50px">
+    <div th:replace="fragments :: go-back"></div>
+
     <div class="d-flex">
-        <div>
-            <h2>Sample</h2>
-        </div>
+        <div><h2 th:text="'Sample: ' + ${individualSample.sampleName}"></h2></div>
     </div>
 
     <form>
         <fieldset disabled>
             <div class="mb-3">
-                <label class="form-label">Created by</label>
-                <input type="text" class="form-control" value="test">
-            </div>
-            <div class="mb-3">
                 <label class="form-label">Date</label>
-                <input type="date" class="form-control" value="test">
+                <input type="date" class="form-control" th:field="*{individualSample.date}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Sample name</label>
@@ -34,6 +30,10 @@
             <div class="mb-3">
                 <label class="form-label">Sample category</label>
                 <input type="text" class="form-control" th:value="${individualSample.sampleCategory}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Created by</label>
+                <input type="text" class="form-control" th:value="${individualSample.creator}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Molecular weight (kDa)</label>

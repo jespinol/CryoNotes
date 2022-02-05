@@ -1,10 +1,9 @@
 package com.jmel.cryonotes.models;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "users")
@@ -15,6 +14,7 @@ public class User {
     private Long id;
 
     @Column(unique = true)
+    @Email
     @NotBlank
     private String email;
 

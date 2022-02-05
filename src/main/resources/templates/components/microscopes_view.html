@@ -15,10 +15,10 @@
 
     <div class="d-flex">
         <div>
-            <h2>Samples</h2>
+            <h2>Microscopes</h2>
         </div>
         <div class="ms-auto">
-            <a th:href="@{/samples/add}"><input class="btn btn-secondary navbar-btn btn-sm" type="submit"
+            <a th:href="@{/microscopes/add}"><input class="btn btn-secondary navbar-btn btn-sm" type="submit"
                                                 value="Add new"/></a>
         </div>
     </div>
@@ -27,24 +27,22 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Sample name</th>
-                <th scope="col">Category</th>
-                <th scope="col">Created by</th>
-                <th scope="col">M.W. (kDa)</th>
-                <th scope="col">Complex</th>
-                <th scope="col">Stoichiometry</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Facility</th>
+                <th scope="col">Accelerating voltage</th>
+                <th scope="col">Spherical aberration (Cs)</th>
+                <th scope="col">Detectors</th>
             </tr>
             </thead>
             <tbody>
-            <tr scope="row" th:each="sample: ${listSamples}">
-                <td th:text="${sample.date}"></td>
-                <td><a th:href="@{'/sample/' + ${sample.id}}" th:text="${sample.sampleName}" style="color:black"></a></td>
-                <td th:text="${sample.sampleCategory}"></td>
-                <td th:text="${sample.creator}"></td>
-                <td th:text="${sample.molecularWeight}"></td>
-                <td th:text="${sample.isComplex}"></td>
-                <td th:text="${sample.stoichiometry}"></td>
+            <tr scope="row" th:each="microscope: ${listMicroscopes}">
+                <td><a th:href="@{'/microscope/' + ${microscope.id}}" th:text="${microscope.name}" style="color:black"></a></td>
+                <td th:text="${microscope.type}"></td>
+                <td th:text="${microscope.facility}"></td>
+                <td th:text="${microscope.voltage}"></td>
+                <td th:text="${microscope.cs}"></td>
+                <td th:text="${microscope.detectors}"></td>
             </tr>
             </tbody>
         </table>
