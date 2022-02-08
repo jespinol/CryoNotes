@@ -39,7 +39,8 @@
             <tbody>
             <tr scope="row" th:each="sample: ${listSamples}">
                 <td th:text="${sample.date}"></td>
-                <td><a th:href="@{'/sample/' + ${sample.id}}" th:text="${sample.sampleName}" style="color:black"></a></td>
+                <td><a th:href="@{'/sample/' + ${sample.id}}" th:text="${sample.sampleName}" style="color:black"></a>
+                </td>
                 <td th:text="${sample.sampleCategory}"></td>
                 <td th:text="${sample.creator}"></td>
                 <td th:text="${sample.molecularWeight}"></td>
@@ -48,6 +49,46 @@
             </tr>
             </tbody>
         </table>
+    </div>
+
+    <div>
+        <nav>
+            <div th:if="${totalPages > 1}">
+                <div class="row col-sm-10">
+                    <div class="col-sm-2">
+                        Total Rows: [[${totalItems}]]
+                    </div>
+                    <div class="col-sm-1">
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}" th:href="@{'/samples?pageNo=' + ${i}}">[[${i}]]</a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                    </span>
+                    </div>
+                    <div class="col-sm-1">
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/samples?pageNo=' + ${currentPage + 1}}">Next</a>
+                        <span th:unless="${currentPage < totalPages}">Next</span>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/samples?pageNo=' + ${totalPages}}">Last</a>
+                        <span th:unless="${currentPage < totalPages}">Last</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--            <ul class="pagination justify-content-center">-->
+            <!--                <li class="page-item disabled">-->
+            <!--                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>-->
+            <!--                </li>-->
+            <!--                <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+            <!--                <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+            <!--                <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+            <!--                <li class="page-item">-->
+            <!--                    <a class="page-link" href="#">Next</a>-->
+            <!--                </li>-->
+            <!--            </ul>-->
+        </nav>
     </div>
 </div>
 
