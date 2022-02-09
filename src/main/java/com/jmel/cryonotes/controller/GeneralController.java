@@ -1,4 +1,4 @@
-package com.jmel.cryonotes.controllers;
+package com.jmel.cryonotes.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 

@@ -51,26 +51,7 @@
         </table>
     </div>
 
-    <div>
-        <nav>
-            <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" th:if="${currentPage > 0}" th:href="@{'/samples?pageNo=' + ${currentPage - 1}}">Previous</a>
-                    <a class="page-link" th:if="${currentPage == 0}" style="color: gray"> Previous</a>
-                </li>
-
-                <li class="page-item" th:each="i: ${#numbers.sequence(0, totalPages -1)}">
-                    <a class="page-link" th:if="${currentPage != i}" th:href="@{'/samples?pageNo=' + ${i}}">[[${i + 1}]]</a>
-                    <a class="page-link" th:if="${currentPage == i}" th:href="@{'/samples?pageNo=' + ${i}}" style="color: gray">[[${i + 1}]]</a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" th:if="${currentPage < totalPages - 1}" th:href="@{'/samples?pageNo=' + ${currentPage + 1}}">Next</a>
-                    <a class="page-link" th:if="${currentPage == totalPages -1}" style="color:gray">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+    <div th:replace="fragments :: pagination"></div>
 </div>
 
 <div th:replace="fragments :: page-footer"></div>

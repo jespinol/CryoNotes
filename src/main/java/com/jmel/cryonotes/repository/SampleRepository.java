@@ -1,7 +1,6 @@
-package com.jmel.cryonotes.models.data;
+package com.jmel.cryonotes.repository;
 
-import com.jmel.cryonotes.models.Sample;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.jmel.cryonotes.model.Sample;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;

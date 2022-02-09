@@ -1,16 +1,12 @@
-package com.jmel.cryonotes.controllers;
+package com.jmel.cryonotes.controller;
 
-import com.jmel.cryonotes.ComponentsService;
-import com.jmel.cryonotes.SampleService;
-import com.jmel.cryonotes.models.Microscope;
-import com.jmel.cryonotes.models.Sample;
-import com.jmel.cryonotes.models.data.MicroscopeRepository;
-import com.jmel.cryonotes.models.data.SampleRepository;
+import com.jmel.cryonotes.service.ComponentsService;
+import com.jmel.cryonotes.model.Microscope;
+import com.jmel.cryonotes.model.Sample;
+import com.jmel.cryonotes.repository.MicroscopeRepository;
+import com.jmel.cryonotes.repository.SampleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,17 +29,7 @@ public class ComponentsController {
     private MicroscopeRepository microscopeRepository;
 
     @Autowired
-    private SampleService sampleService;
-
-    @Autowired
     private ComponentsService componentsService;
-
-//    @GetMapping("/samples")
-//    public String viewSamples(Model model) {
-//        List<Sample> listSamples = (List<Sample>) sampleRepository.findAll();
-//        model.addAttribute("listSamples", listSamples);
-//        return "/components/samples_view";
-//    }
 
     @GetMapping("/samples")
     public String viewSamples(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "3") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy){
@@ -53,7 +39,6 @@ public class ComponentsController {
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         return "/components/samples_view";
-//        return new ResponseEntity<List<Sample>>(list, new HttpHeaders(), HttpStatus.OK);
     }
 
     @GetMapping("/samples/add")
@@ -81,7 +66,7 @@ public class ComponentsController {
 
 //    @GetMapping("/samples/search")
 //    public String viewSamples(Model model, @RequestParam(value="keyword") String keyword) {
-//        List<Sample> listSamples = sampleService.getSamplesMatching(keyword);
+//        List<Sample> listSamples = componentsService.getSamplesMatching(keyword);
 //        model.addAttribute("listSamples", listSamples);
 //        return "/components/samples_view";
 //    }

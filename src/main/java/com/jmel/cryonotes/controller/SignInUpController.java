@@ -1,11 +1,9 @@
-package com.jmel.cryonotes.controllers;
+package com.jmel.cryonotes.controller;
 
-import com.jmel.cryonotes.models.User;
-import com.jmel.cryonotes.models.data.UserRepository;
+import com.jmel.cryonotes.model.User;
+import com.jmel.cryonotes.repository.UserRepository;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 

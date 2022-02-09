@@ -77,7 +77,31 @@
 </div>
 
 <div th:fragment="go-back">
-    <h6><a href="#" onclick="javascript:window.history.back(-1);return false;" class="text-decoration-none">&#8592; Go back</a></h6>
+    <h6><a href="#" onclick="javascript:window.history.back(-1);return false;" class="text-decoration-none">&#8592; Go
+        back</a></h6>
+</div>
+
+<div th:fragment="pagination">
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:if="${currentPage > 0}" th:href="@{'/samples?pageNo=' + ${currentPage - 1}}">Previous</a>
+                <a class="page-link" th:unless="${currentPage > 0}" style="color: gray"> Previous</a>
+            </li>
+
+            <li class="page-item" th:each="i: ${#numbers.sequence(0, totalPages -1)}">
+                <a class="page-link" th:if="${currentPage != i}" th:href="@{'/samples?pageNo=' + ${i}}">[[${i + 1}]]</a>
+                <a class="page-link" th:unless="${currentPage != i}" th:href="@{'/samples?pageNo=' + ${i}}"
+                   style="color: gray">[[${i + 1}]]</a>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link" th:if="${currentPage < totalPages - 1}"
+                   th:href="@{'/samples?pageNo=' + ${currentPage + 1}}">Next</a>
+                <a class="page-link" th:unless="${currentPage < totalPages -1}" style="color:gray">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 <div th:fragment="search-bar">

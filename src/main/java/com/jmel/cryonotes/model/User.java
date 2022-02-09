@@ -1,6 +1,4 @@
-package com.jmel.cryonotes.models;
-
-import org.hibernate.validator.constraints.UniqueElements;
+package com.jmel.cryonotes.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;

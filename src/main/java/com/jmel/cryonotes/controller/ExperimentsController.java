@@ -1,7 +1,7 @@
-package com.jmel.cryonotes.controllers;
+package com.jmel.cryonotes.controller;
 
-import com.jmel.cryonotes.models.Screening;
-import com.jmel.cryonotes.models.data.ScreeningRepository;
+import com.jmel.cryonotes.model.Screening;
+import com.jmel.cryonotes.repository.ScreeningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

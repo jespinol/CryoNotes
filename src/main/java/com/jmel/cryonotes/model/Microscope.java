@@ -1,4 +1,4 @@
-package com.jmel.cryonotes.models;
+package com.jmel.cryonotes.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;

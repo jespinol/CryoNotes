@@ -1,4 +1,4 @@
-package com.jmel.cryonotes.models;
+package com.jmel.cryonotes.model;
 
 public abstract class AbstractEntity {
 }
