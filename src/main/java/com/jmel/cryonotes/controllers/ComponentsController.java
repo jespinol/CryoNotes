@@ -46,13 +46,12 @@ public class ComponentsController {
 //    }
 
     @GetMapping("/samples")
-    public String viewSamples(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "2") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy){
+    public String viewSamples(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "3") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy){
         Page<Sample> page = componentsService.getAllSamples(pageNo, pageSize, sortBy);
         List<Sample> list = page.getContent();
         model.addAttribute("listSamples", list);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("totalItems", page.getTotalElements());
         return "/components/samples_view";
 //        return new ResponseEntity<List<Sample>>(list, new HttpHeaders(), HttpStatus.OK);
     }
