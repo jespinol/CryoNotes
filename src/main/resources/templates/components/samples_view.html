@@ -27,7 +27,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">Date</th>
+                <th scope="col" th:with="currentUrl=(${#httpServletRequest.requestURI + '?' + #strings.defaultString(#httpServletRequest.queryString, '')})"><a th:href="@{${currentUrl}(sortBy=date)}">Date</a></th>
                 <th scope="col">Sample name</th>
                 <th scope="col">Category</th>
                 <th scope="col">Created by</th>
