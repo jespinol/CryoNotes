@@ -27,12 +27,30 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Facility</th>
-                <th scope="col">Accelerating voltage</th>
-                <th scope="col">Spherical aberration (Cs)</th>
-                <th scope="col">Detectors</th>
+                <th scope="col">Name&nbsp;
+                    <a th:href="@{/microscopes/all?sortBy=name&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/microscopes/all?sortBy=name&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Type&nbsp;
+                    <a th:href="@{/microscopes/all?sortBy=type&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/microscopes/all?sortBy=type&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Facility&nbsp;
+                    <a th:href="@{/microscopes/all?sortBy=facility&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/microscopes/all?sortBy=facility&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Accelerating voltage&nbsp;
+                    <a th:href="@{/microscopes/all?sortBy=voltage&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/microscopes/all?sortBy=voltage&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Spherical aberration (Cs)&nbsp;
+                    <a th:href="@{/microscopes/all?sortBy=cs&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/microscopes/all?sortBy=cs&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Detectors&nbsp;
+                    <a th:href="@{/microscopes/all?sortBy=detectors&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/microscopes/all?sortBy=detectors&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
             </tr>
             </thead>
             <tbody>

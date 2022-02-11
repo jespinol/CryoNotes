@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "samples")
-public class Sample extends AbstractEntity{
+public class Sample extends AbstractEntity {
 
     @Column
     private int molecularWeight;

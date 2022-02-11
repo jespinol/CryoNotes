@@ -27,15 +27,42 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Sample name</th>
-                <th scope="col">Category</th>
-                <th scope="col">Created by</th>
-                <th scope="col">Microscope</th>
-                <th scope="col">Grid</th>
-                <th scope="col">Result</th>
-                <th scope="col">Data collection</th>
-                <th scope="col">Storage</th>
+                <th scope="col">Date&nbsp;
+                    <a th:href="@{/screenings/all?sortBy=date&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/screenings/all?sortBy=date&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Sample name&nbsp;
+                    <a th:href="@{/screenings/all?sortBy=name&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/screenings/all?sortBy=name&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Category&nbsp;
+                    <a th:href="@{/screenings/all?sortBy=category&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/screenings/all?sortBy=category&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Created by&nbsp;
+                    <a th:href="@{/screenings/all?sortBy=creator&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/screenings/all?sortBy=creator&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Microscope&nbsp;
+                    <a th:href="@{/screenings/all?sortBy=microscope&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/screenings/all?sortBy=microscope&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Grid&nbsp;
+                    <a th:href="@{/screenings/all?sortBy=grid&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/screenings/all?sortBy=grid&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Result&nbsp;
+                    <a th:href="@{/screenings/all?sortBy=result&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/screenings/all?sortBy=result&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Data collection&nbsp;
+                    <a th:href="@{/screenings/all?sortBy=wasCollected&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/screenings/all?sortBy=wasCollected&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
+                <th scope="col">Storage&nbsp;
+                    <a th:href="@{/screenings/all?sortBy=wasStored&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
+                    <a th:href="@{/screenings/all?sortBy=wasStored&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+                </th>
             </tr>
             </thead>
             <tbody>

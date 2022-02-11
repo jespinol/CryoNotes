@@ -59,8 +59,7 @@
             <tbody>
             <tr scope="row" th:each="item: ${allItems}">
                 <td th:text="${item.date}"></td>
-                <td><a th:href="@{'/samples/' + ${item.id}}" th:text="${item.name}" style="color:black"></a>
-                </td>
+                <td><a th:href="@{'/samples/' + ${item.id}}" th:text="${item.name}" style="color:black"></a></td>
                 <td th:text="${item.category}"></td>
                 <td th:text="${item.creator}"></td>
                 <td th:text="${item.molecularWeight}"></td>
