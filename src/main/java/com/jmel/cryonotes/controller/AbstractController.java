@@ -25,15 +25,21 @@ public abstract class AbstractController<U> {
 
     Class<?> cls = Class.forName(getClassName());
 
-    public Page<U> getAll(Integer pageNo, Integer pageSize, String sortBy) {
-        PageRequest paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+    public Page<U> getAll(Integer pageNo, Integer pageSize, String sortBy, String ascending) {
+        PageRequest paging;
+        if (ascending.equals("true")) {
+            paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
+        } else {
+            paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+        }
         PagingAndSortingRepository<U, Long> repository = getRepository();
         return repository.findAll(paging);
     }
 
     @GetMapping("/all")
-    public String viewAll(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "30") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy) {
-        Page<?> page = getAll(pageNo, pageSize, sortBy);
+    public String viewAll(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "30") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "false") String ascending) {
+        Page<?> page = getAll(pageNo, pageSize, sortBy, ascending);
+        model.addAttribute("currentObject", getViewName());
         model.addAttribute("allItems", page.getContent());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
@@ -60,6 +66,6 @@ public abstract class AbstractController<U> {
             return getViewName() + "_add";
         }
         getRepository().save(object);
-        return viewAll(model, 0, 100, "id");
+        return viewAll(model, 0, 100, "id", "false");
     }
 }
