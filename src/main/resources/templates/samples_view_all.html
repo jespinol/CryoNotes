@@ -37,15 +37,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr scope="row" th:each="sample: ${listSamples}">
-                <td th:text="${sample.date}"></td>
-                <td><a th:href="@{'/sample/' + ${sample.id}}" th:text="${sample.sampleName}" style="color:black"></a>
+            <tr scope="row" th:each="item: ${allItems}">
+                <td th:text="${item.date}"></td>
+                <td><a th:href="@{'/samples/' + ${item.id}}" th:text="${item.name}" style="color:black"></a>
                 </td>
-                <td th:text="${sample.sampleCategory}"></td>
-                <td th:text="${sample.creator}"></td>
-                <td th:text="${sample.molecularWeight}"></td>
-                <td th:text="${sample.isComplex}"></td>
-                <td th:text="${sample.stoichiometry}"></td>
+                <td th:text="${item.category}"></td>
+                <td th:text="${item.creator}"></td>
+                <td th:text="${item.molecularWeight}"></td>
+                <td th:text="${item.isComplex}"></td>
+                <td th:text="${item.stoichiometry}"></td>
             </tr>
             </tbody>
         </table>

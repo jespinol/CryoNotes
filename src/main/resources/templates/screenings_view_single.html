@@ -14,42 +14,50 @@
     <div th:replace="fragments :: go-back"></div>
 
     <div class="d-flex">
-        <div><h2 th:text="'Sample: ' + ${individualSample.sampleName}"></h2></div>
+        <div><h2 th:text="'Screening for: ' + ${singleItem.name}"></h2></div>
     </div>
 
     <form>
         <fieldset disabled>
             <div class="mb-3">
                 <label class="form-label">Date</label>
-                <input type="date" class="form-control" th:field="*{individualSample.date}">
+                <input type="date" class="form-control" th:field="*{singleItem.date}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Sample name</label>
-                <input type="text" class="form-control" th:value="${individualSample.sampleName}" required>
+                <input type="text" class="form-control" th:value="${singleItem.name}" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Sample category</label>
-                <input type="text" class="form-control" th:value="${individualSample.sampleCategory}">
+                <input type="text" class="form-control" th:value="${singleItem.category}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Created by</label>
-                <input type="text" class="form-control" th:value="${individualSample.creator}">
+                <input type="text" class="form-control" th:value="${singleItem.creator}">
             </div>
             <div class="mb-3">
-                <label class="form-label">Molecular weight (kDa)</label>
-                <input type="text" class="form-control" th:value="${individualSample.molecularWeight}">
+                <label class="form-label">Microscope</label>
+                <input type="text" class="form-control" th:value="${singleItem.microscope}">
             </div>
             <div class="mb-3">
-                <label class="form-label">Is it a complex?</label>
-                <input type="text" class="form-control" th:value="${individualSample.isComplex}">
+                <label class="form-label">Grid</label>
+                <input type="text" class="form-control" th:value="${singleItem.grid}">
             </div>
             <div class="mb-3">
-                <label class="form-label">Stoichiometry</label>
-                <input type="text" class="form-control" th:value="${individualSample.stoichiometry}">
+                <label class="form-label">Result</label>
+                <input type="text" class="form-control" th:value="${singleItem.result}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Data collection</label>
+                <input type="text" class="form-control" th:value="${singleItem.wasCollected}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Storage</label>
+                <input type="text" class="form-control" th:value="${singleItem.wasStored}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Comments</label>
-                <input type="text" class="form-control" th:value="${individualSample.comments}">
+                <input type="text" class="form-control" th:value="${singleItem.comments}">
             </div>
         </fieldset>
     </form>

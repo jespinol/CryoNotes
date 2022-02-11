@@ -14,38 +14,38 @@
     <div th:replace="fragments :: go-back"></div>
 
     <div class="d-flex">
-        <div><h2 th:text="'Microscope: ' + ${individualMicroscope.name}"></h2></div>
+        <div><h2 th:text="'Microscope: ' + ${singleItem.name}"></h2></div>
     </div>
 
     <form>
         <fieldset disabled>
             <div class="mb-3">
                 <label class="form-label">Microscope name</label>
-                <input type="text" class="form-control" th:value="${individualMicroscope.name}" required>
+                <input type="text" class="form-control" th:value="${singleItem.name}" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Microscope type</label>
-                <input type="text" class="form-control" th:value="${individualMicroscope.type}">
+                <input type="text" class="form-control" th:value="${singleItem.type}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Facility</label>
-                <input type="text" class="form-control" th:value="${individualMicroscope.facility}">
+                <input type="text" class="form-control" th:value="${singleItem.facility}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Accelerating voltage</label>
-                <input type="text" class="form-control" th:value="${individualMicroscope.voltage}">
+                <input type="text" class="form-control" th:value="${singleItem.voltage}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Spherical aberration (Cs)</label>
-                <input type="text" class="form-control" th:value="${individualMicroscope.cs}">
+                <input type="text" class="form-control" th:value="${singleItem.cs}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Detectors</label>
-                <input type="text" class="form-control" th:value="${individualMicroscope.detectors}">
+                <input type="text" class="form-control" th:value="${singleItem.detectors}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Comments</label>
-                <input type="text" class="form-control" th:value="${individualMicroscope.comments}">
+                <input type="text" class="form-control" th:value="${singleItem.comments}">
             </div>
         </fieldset>
     </form>

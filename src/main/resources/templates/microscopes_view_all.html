@@ -36,13 +36,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr scope="row" th:each="microscope: ${listMicroscopes}">
-                <td><a th:href="@{'/microscope/' + ${microscope.id}}" th:text="${microscope.name}" style="color:black"></a></td>
-                <td th:text="${microscope.type}"></td>
-                <td th:text="${microscope.facility}"></td>
-                <td th:text="${microscope.voltage}"></td>
-                <td th:text="${microscope.cs}"></td>
-                <td th:text="${microscope.detectors}"></td>
+            <tr scope="row" th:each="item: ${allItems}">
+                <td><a th:href="@{'/microscopes/' + ${item.id}}" th:text="${item.name}" style="color:black"></a></td>
+                <td th:text="${item.type}"></td>
+                <td th:text="${item.facility}"></td>
+                <td th:text="${item.voltage}"></td>
+                <td th:text="${item.cs}"></td>
+                <td th:text="${item.detectors}"></td>
             </tr>
             </tbody>
         </table>

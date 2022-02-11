@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <form th:action="@{/screenings/save}" th:object="${screening}" method="post">
+    <form th:action="@{/screenings/save}" th:object="${newItem}" method="post">
         <div class="mb-3">
             <label class="form-label">Date</label>
             <input type="date" class="form-control" th:field="*{date}" id="dateFrom" required>
