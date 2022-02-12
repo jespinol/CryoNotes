@@ -76,9 +76,12 @@
     </a>
 </div>
 
-<div th:fragment="go-back">
-    <h6><a href="#" onclick="javascript:window.history.back(-1);return false;" class="text-decoration-none">&#8592; Go
-        back</a></h6>
+<div th:fragment="go-back-home">
+    <h6><a th:href="@{/home}" class="text-decoration-none">&#8592; Go back</a></h6>
+</div>
+
+<div th:fragment="go-back-page">
+    <h6><a th:href="@{'/' + ${currentObject} + '/all'}" class="text-decoration-none">&#8592; Go back</a></h6>
 </div>
 
 <div th:fragment="pagination">

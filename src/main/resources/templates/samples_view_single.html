@@ -11,47 +11,50 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div style="margin-top: 60px; margin-bottom: 50px; margin-left: 50px; margin-right: 50px">
-    <div th:replace="fragments :: go-back"></div>
+    <div th:replace="fragments :: go-back-page"></div>
 
     <div class="d-flex">
         <div><h2 th:text="'Sample: ' + ${singleItem.name}"></h2></div>
     </div>
 
-    <form>
-        <fieldset disabled>
+    <form th:action="@{'/samples/save/' + ${singleItem.id}}" th:object="${singleItem}" method="post">
+        <fieldset>
             <div class="mb-3">
                 <label class="form-label">Date</label>
-                <input type="date" class="form-control" th:field="*{singleItem.date}">
+                <input type="date" class="form-control" th:field="*{date}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Sample name</label>
-                <input type="text" class="form-control" th:value="${singleItem.name}" required>
+                <input type="text" class="form-control" th:field="*{name}" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Sample category</label>
-                <input type="text" class="form-control" th:value="${singleItem.category}">
+                <input type="text" class="form-control" th:field="*{category}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Created by</label>
-                <input type="text" class="form-control" th:value="${singleItem.creator}">
+                <input type="text" class="form-control" th:field="*{creator}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Molecular weight (kDa)</label>
-                <input type="text" class="form-control" th:value="${singleItem.molecularWeight}">
+                <input type="text" class="form-control" th:field="*{molecularWeight}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Is it a complex?</label>
-                <input type="text" class="form-control" th:value="${singleItem.isComplex}">
+                <input type="text" class="form-control" th:field="*{isComplex}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Stoichiometry</label>
-                <input type="text" class="form-control" th:value="${singleItem.stoichiometry}">
+                <input type="text" class="form-control" th:field="*{stoichiometry}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Comments</label>
-                <input type="text" class="form-control" th:value="${singleItem.comments}">
+                <input type="text" class="form-control" th:field="*{comments}">
             </div>
         </fieldset>
+        <div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
     </form>
 </div>
 

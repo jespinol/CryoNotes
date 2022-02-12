@@ -48,24 +48,38 @@ public abstract class AbstractController<U> {
 
     @GetMapping("/{id}")
     public String viewSingle(Model model, @PathVariable Long id) {
-        Optional<?> optional = getRepository().findById(id);
-        Object item = optional.get();
+        Optional<U> optional = getRepository().findById(id);
+        U item = optional.get();
         model.addAttribute("singleItem", item);
+        model.addAttribute("currentObject", getViewName());
         return getViewName() + "_view_single";
     }
 
     @GetMapping("/add")
     public String add(Model model) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         model.addAttribute("newItem", cls.getDeclaredConstructor().newInstance());
+        model.addAttribute("currentObject", getViewName());
         return getViewName() + "_add";
     }
+
 
     @PostMapping("/save")
     public String save(@Valid U object, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("currentObject", getViewName());
             return getViewName() + "_add";
         }
         getRepository().save(object);
         return viewAll(model, 0, 100, "id", "false");
+    }
+
+    @PostMapping("/save/{id}")
+    public String editSave(@Valid U object, BindingResult bindingResult, Model model, @PathVariable Long id) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("currentObject", getViewName());
+            return viewSingle(model, id);
+        }
+        getRepository().save(object);
+        return  viewAll(model, 0, 100, "id", "false");
     }
 }
