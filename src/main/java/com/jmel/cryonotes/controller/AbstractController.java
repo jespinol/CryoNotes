@@ -62,7 +62,6 @@ public abstract class AbstractController<U> {
         return getViewName() + "_add";
     }
 
-
     @PostMapping("/save")
     public String save(@Valid U object, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
