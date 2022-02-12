@@ -38,6 +38,7 @@
             <div class="mb-3">
                 <label class="form-label">Molecular weight (kDa)</label>
                 <input type="text" class="form-control" th:field="*{molecularWeight}">
+                <p th:if="${#fields.hasErrors('molecularWeight')}" class="alert-danger">Enter a numeric value, no units</p>
             </div>
             <div class="mb-3">
                 <label class="form-label">Is it a complex?</label>

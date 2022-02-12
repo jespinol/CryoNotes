@@ -17,35 +17,38 @@
         <div><h2 th:text="'Microscope: ' + ${singleItem.name}"></h2></div>
     </div>
 
-    <form>
-        <fieldset disabled>
+    <form th:action="@{'/microscopes/save/' + ${singleItem.id}}" th:object="${singleItem}" method="post">
+        <fieldset>
             <div class="mb-3">
                 <label class="form-label">Microscope name</label>
-                <input type="text" class="form-control" th:value="${singleItem.name}" required>
+                <input type="text" class="form-control" th:field="*{name}" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Microscope type</label>
-                <input type="text" class="form-control" th:value="${singleItem.type}">
+                <input type="text" class="form-control" th:field="*{type}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Facility</label>
-                <input type="text" class="form-control" th:value="${singleItem.facility}">
+                <input type="text" class="form-control" th:field="*{facility}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Accelerating voltage</label>
-                <input type="text" class="form-control" th:value="${singleItem.voltage}">
+                <input type="text" class="form-control" th:field="*{voltage}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Spherical aberration (Cs)</label>
-                <input type="text" class="form-control" th:value="${singleItem.cs}">
+                <input type="text" class="form-control" th:field="*{cs}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Detectors</label>
-                <input type="text" class="form-control" th:value="${singleItem.detectors}">
+                <input type="text" class="form-control" th:field="*{detectors}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Comments</label>
-                <input type="text" class="form-control" th:value="${singleItem.comments}">
+                <input type="text" class="form-control" th:field="*{comments}">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
         </fieldset>
     </form>
