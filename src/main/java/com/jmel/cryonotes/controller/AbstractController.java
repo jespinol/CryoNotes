@@ -34,17 +34,14 @@ public abstract class AbstractController<T> {
     Class<?> cls = Class.forName(getClassName());
 
     public PageRequest getPaging(Integer pageNo, Integer pageSize, String sortBy, String ascending) {
-        PageRequest paging;
         if (ascending.equals("true")) {
-            paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
-        } else {
-            paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+            return PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
         }
-        return paging;
+        return PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
     }
 
     @GetMapping("/all")
-    public String viewAll(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "30") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "false") String ascending) {
+    public String viewAll(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "20") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "false") String ascending) {
         Page<T> page = getRepository().findAll(getPaging(pageNo, pageSize, sortBy, ascending));
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("allItems", page.getContent());
@@ -76,7 +73,7 @@ public abstract class AbstractController<T> {
             return getViewName() + "_add";
         }
         getRepository().save(object);
-        return viewAll(model, 0, 30, "id", "false");
+        return viewAll(model, 0, 20, "id", "false");
     }
 
     @PostMapping("/save/{id}")
@@ -86,7 +83,7 @@ public abstract class AbstractController<T> {
             return viewSingle(model, id);
         }
         getRepository().save(object);
-        return viewAll(model, 0, 30, "id", "false");
+        return viewAll(model, 0, 20, "id", "false");
     }
 
     @GetMapping("/search")

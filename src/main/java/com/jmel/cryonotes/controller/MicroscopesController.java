@@ -1,9 +1,9 @@
 package com.jmel.cryonotes.controller;
 
 import com.jmel.cryonotes.model.Microscope;
-import com.jmel.cryonotes.model.Sample;
 import com.jmel.cryonotes.repository.MicroscopeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
