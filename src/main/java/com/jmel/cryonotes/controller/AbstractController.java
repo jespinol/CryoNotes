@@ -1,5 +1,7 @@
 package com.jmel.cryonotes.controller;
 
+import com.jmel.cryonotes.repository.SampleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -10,9 +12,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractController<U> {
+
+    @Autowired
+    SampleRepository sampleRepository;
 
     protected AbstractController() throws ClassNotFoundException {
     }
@@ -25,20 +31,23 @@ public abstract class AbstractController<U> {
 
     Class<?> cls = Class.forName(getClassName());
 
-    public Page<U> getAll(Integer pageNo, Integer pageSize, String sortBy, String ascending) {
+    public PageRequest getPaging(Integer pageNo, Integer pageSize, String sortBy, String ascending) {
         PageRequest paging;
         if (ascending.equals("true")) {
             paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
         } else {
             paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
         }
-        PagingAndSortingRepository<U, Long> repository = getRepository();
-        return repository.findAll(paging);
+        return paging;
     }
 
     @GetMapping("/all")
-    public String viewAll(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "30") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "false") String ascending) {
-        Page<?> page = getAll(pageNo, pageSize, sortBy, ascending);
+    public String viewAll(Model model,
+                          @RequestParam(defaultValue = "0") Integer pageNo,
+                          @RequestParam(defaultValue = "30") Integer pageSize,
+                          @RequestParam(defaultValue = "id") String sortBy,
+                          @RequestParam(defaultValue = "false") String ascending) {
+        Page<U> page = getRepository().findAll(getPaging(pageNo, pageSize, sortBy, ascending));
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("allItems", page.getContent());
         model.addAttribute("currentPage", pageNo);
@@ -69,7 +78,7 @@ public abstract class AbstractController<U> {
             return getViewName() + "_add";
         }
         getRepository().save(object);
-        return viewAll(model, 0, 100, "id", "false");
+        return viewAll(model, 0, 30, "id", "false");
     }
 
     @PostMapping("/save/{id}")
@@ -79,6 +88,15 @@ public abstract class AbstractController<U> {
             return viewSingle(model, id);
         }
         getRepository().save(object);
-        return  viewAll(model, 0, 100, "id", "false");
+        return viewAll(model, 0, 30, "id", "false");
     }
+
+    @GetMapping("/search")
+    public String searchSimple(Model model, @RequestParam(value = "keyword") String keyword) {
+        List<?> searchResults = sampleRepository.search(keyword);
+        model.addAttribute("searchResults", searchResults);
+        model.addAttribute("currentObject", getViewName());
+        return getViewName() + "_view_search";
+    }
+
 }

@@ -12,7 +12,7 @@
 
 
 <div style="margin-top: 60px; margin-bottom: 50px; margin-left: 50px; margin-right: 50px">
-    <div th:replace="fragments :: go-back-home"></div>
+    <div th:replace="fragments :: go-back-page"></div>
 
     <div class="d-flex">
         <div>
@@ -29,36 +29,36 @@
             <thead>
             <tr>
                 <th scope="col">Date&nbsp;
-                    <a th:href="@{/samples/all?sortBy=date&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
-                    <a th:href="@{/samples/all?sortBy=date&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+<!--                    <a th:href="@{/samples/all?sortBy=date&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>-->
+<!--                    <a th:href="@{/samples/all?sortBy=date&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>-->
                 </th>
                 <th scope="col">Sample name&nbsp;
-                    <a th:href="@{/samples/all?sortBy=name&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
-                    <a th:href="@{/samples/all?sortBy=name&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+<!--                    <a th:href="@{/samples/all?sortBy=name&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>-->
+<!--                    <a th:href="@{/samples/all?sortBy=name&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>-->
                 </th>
                 <th scope="col">Category&nbsp;
-                    <a th:href="@{/samples/all?sortBy=category&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
-                    <a th:href="@{/samples/all?sortBy=category&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+<!--                    <a th:href="@{/samples/all?sortBy=category&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>-->
+<!--                    <a th:href="@{/samples/all?sortBy=category&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>-->
                 </th>
                 <th scope="col">Created by&nbsp;
-                    <a th:href="@{/samples/all?sortBy=creator&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
-                    <a th:href="@{/samples/all?sortBy=creator&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+<!--                    <a th:href="@{/samples/all?sortBy=creator&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>-->
+<!--                    <a th:href="@{/samples/all?sortBy=creator&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>-->
                 </th>
                 <th scope="col">M.W. (<abbr title="kilodalton">kDa</abbr>)&nbsp;
-                    <a th:href="@{/samples/all?sortBy=molecularWeight&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
-                    <a th:href="@{/samples/all?sortBy=molecularWeight&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+<!--                    <a th:href="@{/samples/all?sortBy=molecularWeight&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>-->
+<!--                    <a th:href="@{/samples/all?sortBy=molecularWeight&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>-->
                 </th>
                 <th scope="col">Complex&nbsp;
-                    <a th:href="@{/samples/all?sortBy=isComplex&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
-                    <a th:href="@{/samples/all?sortBy=isComplex&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>
+<!--                    <a th:href="@{/samples/all?sortBy=isComplex&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>-->
+<!--                    <a th:href="@{/samples/all?sortBy=isComplex&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a>-->
                 </th>
                 <th scope="col">Stoichiometry&nbsp;
-                    <a th:href="@{/samples/all?sortBy=stoichiometry&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>
-                    <a th:href="@{/samples/all?sortBy=stoichiometry&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a></th>
+<!--                    <a th:href="@{/samples/all?sortBy=stoichiometry&ascending=true}" class="text-decoration-none text-dark">&#x25B2;</a>-->
+<!--                    <a th:href="@{/samples/all?sortBy=stoichiometry&ascending=false}" class="text-decoration-none text-dark">&#x25BC;</a></th>-->
             </tr>
             </thead>
             <tbody>
-            <tr scope="row" th:each="item: ${allItems}">
+            <tr scope="row" th:each="item: ${searchResults}">
                 <td th:text="${item.date}"></td>
                 <td><a th:href="@{'/samples/' + ${item.id}}" th:text="${item.name}" style="color:black"></a></td>
                 <td th:text="${item.category}"></td>
@@ -71,7 +71,6 @@
         </table>
     </div>
 
-    <div th:replace="fragments :: pagination"></div>
 </div>
 
 <div th:replace="fragments :: page-footer"></div>

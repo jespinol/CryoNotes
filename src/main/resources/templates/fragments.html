@@ -42,8 +42,8 @@
                         </ul>
                     </li>
                 </ul>
-                <form>
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                <form th:action="@{/samples/search}" method="get">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="keyword" id="keyword" size="50" th:value="${keyword}">
                 </form>
             </div>
         </div>
@@ -84,6 +84,10 @@
     <h6><a th:href="@{'/' + ${currentObject} + '/all'}" class="text-decoration-none">&#8592; Go back</a></h6>
 </div>
 
+<div th:fragment="go-back-up">
+    <h6><a <a href="#" onclick="javascript:window.history.back(-1);return false;" class="text-decoration-none">&#8592; Go back</a></h6>
+</div>
+
 <div th:fragment="pagination">
     <nav>
         <ul class="pagination justify-content-center">
@@ -105,20 +109,6 @@
             </li>
         </ul>
     </nav>
-</div>
-
-<div th:fragment="search-bar">
-    <form th:action="@{/samples/search}" method="get">
-        Search: <input required type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"/>
-        <input type="submit" value="Search"/>
-    </form>
-</div>
-
-<div th:fragment="search-bar-screenings">
-    <form th:action="@{/screenings/search}" method="get">
-        Search: <input required type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"/>
-        <input type="submit" value="Search"/>
-    </form>
 </div>
 
 </body>
