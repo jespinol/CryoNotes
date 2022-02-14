@@ -42,11 +42,7 @@ public abstract class AbstractController<U> {
     }
 
     @GetMapping("/all")
-    public String viewAll(Model model,
-                          @RequestParam(defaultValue = "0") Integer pageNo,
-                          @RequestParam(defaultValue = "30") Integer pageSize,
-                          @RequestParam(defaultValue = "id") String sortBy,
-                          @RequestParam(defaultValue = "false") String ascending) {
+    public String viewAll(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "30") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "false") String ascending) {
         Page<U> page = getRepository().findAll(getPaging(pageNo, pageSize, sortBy, ascending));
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("allItems", page.getContent());
