@@ -1,10 +1,13 @@
 package com.jmel.cryonotes.controller;
 
+import com.jmel.cryonotes.model.Sample;
 import com.jmel.cryonotes.model.Screening;
 import com.jmel.cryonotes.repository.ScreeningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/screenings")
@@ -31,5 +34,10 @@ public class ScreeningsController extends AbstractController<Screening> {
     @Override
     ScreeningRepository getRepository() {
         return repository;
+    }
+
+    @Override
+    public List<Screening> getSearch(String keyword) {
+        return repository.search(keyword);
     }
 }

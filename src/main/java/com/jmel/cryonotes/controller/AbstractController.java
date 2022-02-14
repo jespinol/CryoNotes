@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractController<U> {
+public abstract class AbstractController<T> {
 
     @Autowired
     SampleRepository sampleRepository;
@@ -25,7 +25,9 @@ public abstract class AbstractController<U> {
 
     abstract String getViewName();
 
-    abstract PagingAndSortingRepository<U, Long> getRepository();
+    abstract PagingAndSortingRepository<T, Long> getRepository();
+
+    abstract List<T> getSearch(String keyword);
 
     abstract String getClassName();
 
@@ -43,7 +45,7 @@ public abstract class AbstractController<U> {
 
     @GetMapping("/all")
     public String viewAll(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "30") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "false") String ascending) {
-        Page<U> page = getRepository().findAll(getPaging(pageNo, pageSize, sortBy, ascending));
+        Page<T> page = getRepository().findAll(getPaging(pageNo, pageSize, sortBy, ascending));
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("allItems", page.getContent());
         model.addAttribute("currentPage", pageNo);
@@ -53,8 +55,8 @@ public abstract class AbstractController<U> {
 
     @GetMapping("/{id}")
     public String viewSingle(Model model, @PathVariable Long id) {
-        Optional<U> optional = getRepository().findById(id);
-        U item = optional.get();
+        Optional<T> optional = getRepository().findById(id);
+        T item = optional.get();
         model.addAttribute("singleItem", item);
         model.addAttribute("currentObject", getViewName());
         return getViewName() + "_view_single";
@@ -68,7 +70,7 @@ public abstract class AbstractController<U> {
     }
 
     @PostMapping("/save")
-    public String save(@Valid U object, BindingResult bindingResult, Model model) {
+    public String save(@Valid T object, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("currentObject", getViewName());
             return getViewName() + "_add";
@@ -78,7 +80,7 @@ public abstract class AbstractController<U> {
     }
 
     @PostMapping("/save/{id}")
-    public String editSave(@Valid U object, BindingResult bindingResult, Model model, @PathVariable Long id) {
+    public String editSave(@Valid T object, BindingResult bindingResult, Model model, @PathVariable Long id) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("currentObject", getViewName());
             return viewSingle(model, id);
@@ -89,7 +91,7 @@ public abstract class AbstractController<U> {
 
     @GetMapping("/search")
     public String searchSimple(Model model, @RequestParam(value = "keyword") String keyword) {
-        List<?> searchResults = sampleRepository.search(keyword);
+        List<T> searchResults = getSearch(keyword);
         model.addAttribute("searchResults", searchResults);
         model.addAttribute("currentObject", getViewName());
         return getViewName() + "_view_search";
