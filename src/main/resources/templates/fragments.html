@@ -43,7 +43,8 @@
                     </li>
                 </ul>
                 <form th:if="${currentObject != null}" th:action="@{'/' + ${currentObject} + '/search'}" method="get">
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="keyword" id="keyword" size="50" th:value="${keyword}">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="keyword"
+                           id="keyword" size="50" th:value="${keyword}">
                 </form>
             </div>
         </div>
@@ -85,30 +86,50 @@
 </div>
 
 <div th:fragment="go-back-up">
-    <h6><a <a href="#" onclick="javascript:window.history.back(-1);return false;" class="text-decoration-none">&#8592; Go back</a></h6>
+    <h6><a <a href="#" onclick="javascript:window.history.back(-1);return false;" class="text-decoration-none">&#8592;
+        Go back</a></h6>
 </div>
 
-<div th:fragment="pagination">
-    <nav>
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" th:if="${currentPage > 0}" th:href="@{'/' + ${currentObject} + '/all?pageNo=' + ${currentPage - 1}}">Previous</a>
-                <a class="page-link" th:unless="${currentPage > 0}" style="color: gray"> Previous</a>
-            </li>
+<div th:fragment="pagination" class="d-flex">
+    <div class="btn-group dropup">
+            <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown">Rows per page &nbsp;</button>
+            <ul class="dropdown-menu dropdown-menu-end" style="min-width: 60px !important;">
+                <li><a class="dropdown-item"
+                       th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=5'}">5</a>
+                </li>
+                <li><a class="dropdown-item"
+                       th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=20'}">20</a>
+                </li>
+                <li><a class="dropdown-item"
+                       th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=100'}">100</a>
+                </li>
+                <li><a class="dropdown-item"
+                       th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=100'}">All</a>
+                </li>
+            </ul>
+    </div>
+    <div class="pagination ms-auto">
+        <li class="page-item">
+            <a class="page-link" th:if="${currentPage > 0}"
+               th:href="@{'/' + ${currentObject} + '/all?pageNo=' + ${currentPage - 1} + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=' + ${pageSize}}">Previous</a>
+            <a class="page-link" th:unless="${currentPage > 0}" style="color: gray"> Previous</a>
+        </li>
 
-            <li class="page-item" th:each="i: ${#numbers.sequence(0, totalPages -1)}">
-                <a class="page-link" th:if="${currentPage != i}" th:href="@{'/' + ${currentObject} + '/all?pageNo=' + ${i}}">[[${i + 1}]]</a>
-                <a class="page-link" th:unless="${currentPage != i}" th:href="@{'/' + ${currentObject} + '/all?pageNo=' + ${i}}"
-                   style="color: gray">[[${i + 1}]]</a>
-            </li>
+        <li class="page-item" th:each="i: ${#numbers.sequence(0, totalPages -1)}">
+            <a class="page-link" th:if="${currentPage != i}"
+               th:href="@{'/' + ${currentObject} + '/all?pageNo=' + ${i} + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=' + ${pageSize}}">[[${i
+                + 1}]]</a>
+            <a class="page-link" th:unless="${currentPage != i}"
+               th:href="@{'/' + ${currentObject} + '/all?pageNo=' + ${i} + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=' + ${pageSize}}"
+               style="color: gray">[[${i + 1}]]</a>
+        </li>
 
-            <li class="page-item">
-                <a class="page-link" th:if="${currentPage < totalPages - 1}"
-                   th:href="@{'/' + ${currentObject} + '/all?pageNo=' + ${currentPage + 1}}">Next</a>
-                <a class="page-link" th:unless="${currentPage < totalPages -1}" style="color:gray">Next</a>
-            </li>
-        </ul>
-    </nav>
+        <li class="page-item">
+            <a class="page-link" th:if="${currentPage < totalPages - 1}"
+               th:href="@{'/' + ${currentObject} + '/all?pageNo=' + ${currentPage + 1} + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=' + ${pageSize}}">Next</a>
+            <a class="page-link" th:unless="${currentPage < totalPages -1}" style="color:gray">Next</a>
+        </li>
+    </div>
 </div>
 
 </body>

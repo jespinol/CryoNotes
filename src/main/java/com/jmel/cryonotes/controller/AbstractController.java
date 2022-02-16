@@ -15,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
+
 public abstract class AbstractController<T> {
 
     @Autowired
@@ -41,12 +42,21 @@ public abstract class AbstractController<T> {
     }
 
     @GetMapping("/all")
-    public String viewAll(Model model, @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "20") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "false") String ascending) {
+    public String viewAll(Model model,
+                          @RequestParam(defaultValue = "0") Integer pageNo,
+                          @RequestParam(defaultValue = "20") Integer pageSize,
+                          @RequestParam(defaultValue = "id") String sortBy,
+                          @RequestParam(defaultValue = "false") String ascending
+                          ) {
         Page<T> page = getRepository().findAll(getPaging(pageNo, pageSize, sortBy, ascending));
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("allItems", page.getContent());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("ascending", ascending);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("totalRows", page.getTotalElements());
+        model.addAttribute("pageSize", pageSize);
         return getViewName() + "_view_all";
     }
 
