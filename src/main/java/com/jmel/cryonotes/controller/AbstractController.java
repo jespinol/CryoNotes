@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +49,7 @@ public abstract class AbstractController<T> {
                           @RequestParam(defaultValue = "20") Integer pageSize,
                           @RequestParam(defaultValue = "id") String sortBy,
                           @RequestParam(defaultValue = "false") String ascending
-                          ) {
+    ) {
         Page<T> page = getRepository().findAll(getPaging(pageNo, pageSize, sortBy, ascending));
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("allItems", page.getContent());
@@ -67,6 +69,20 @@ public abstract class AbstractController<T> {
         model.addAttribute("singleItem", item);
         model.addAttribute("currentObject", getViewName());
         return getViewName() + "_view_single";
+    }
+
+    @GetMapping("/compare/{ids}")
+    public String viewCompare(Model model, @PathVariable String ids) {
+        System.out.println(ids);
+        String[] idsStrArr = ids.split("&");
+        List<Long> idsLongArr = new ArrayList<>();
+        for (String str : idsStrArr) {
+            idsLongArr.add(Long.parseLong(str));
+        }
+        List<T> compareItems = (List<T>) getRepository().findAllById(idsLongArr);
+        model.addAttribute("compareItems", compareItems);
+        model.addAttribute("currentObject", getViewName());
+        return getViewName() + "_view_compare";
     }
 
     @GetMapping("/add")
