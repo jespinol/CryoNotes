@@ -30,7 +30,8 @@
                                         value="Edit"/></a>
                             </div>
                             </h5></div>
-                        <div class="mb-3" th:each="attribute: ${allAttributes}" th:with="attrLabel=${attribute.key},attrName=${attribute.value}">
+                        <div class="mb-3" th:each="attribute: ${allAttributes}"
+                             th:with="attrLabel=${attribute.key},attrName=${attribute.value}">
                             <label class="form-label">[[${attrLabel}]]</label>
                             <input type="text" class="form-control" th:value="${item.__${attrName}__}">
                         </div>
