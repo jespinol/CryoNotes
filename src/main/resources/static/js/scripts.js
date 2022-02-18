@@ -6,5 +6,5 @@ function addCheckedIdsToUrl() {
             ids.push(checkboxes[i].value);
         }
     }
-    location.href = 'compare/' + ids.join('&')
+    location.href = ids.join('&');
 }
