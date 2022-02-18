@@ -8,3 +8,12 @@ function addCheckedIdsToUrl() {
     }
     location.href = ids.join('&');
 }
+
+function fillTodaysDate() {
+    const today = new Date();
+    document.getElementById('dateForm').valueAsDate = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+}
+
+function fillLoggedUser() {
+    document.getElementById('usernameForm').value = '[[${#request.userPrincipal.principal.fullName}]]';
+}
