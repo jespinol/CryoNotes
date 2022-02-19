@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ScreeningRepository extends PagingAndSortingRepository<Screening, Long> {
     @Query("SELECT s FROM Screening s WHERE CONCAT(s.date, s.name, s.category, s.creator, s.microscope, s.grid, s.result, s.wasCollected, s.wasStored, s.comments) LIKE CONCAT('%',:keyword,'%')")
-    public List<Screening> search(@Param("keyword") String keyword);
+    public List<Screening> simpleSearch(@Param("keyword") String keyword);
 }
