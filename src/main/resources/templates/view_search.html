@@ -35,9 +35,8 @@
                     <th scope="row" class="bs-checkbox">
                         <input type="checkbox" name="header">
                     </th>
-                    <th scope="row" th:each="attribute: ${summaryAttributes}"
-                        th:with="attrLabel=${attribute.key},attrName=${attribute.value}">
-                        [[${attrLabel}]]
+                    <th scope="row" th:each="attribute: ${attributes}" th:if="${attribute.value.isInSummary()}">
+                        [[${attribute.value.getLabel()}]]
                     </th>
                 </tr>
                 </thead>
@@ -46,8 +45,8 @@
                     <td class="bs-checkbox"><label><input class="checkedId" type="checkbox"
                                                           th:value="${item.id}"></label>
                     </td>
-                    <td th:each="attribute: ${summaryAttributes}" th:with="attrName=${attribute.value}">
-                        [[${item.__${attrName}__}]]
+                    <td th:each="attribute: ${attributes}" th:if="${attribute.value.isInSummary()}">
+                        [[${item.__${attribute.key}__}]]
                     </td>
                 </tr>
                 </tbody>

@@ -19,10 +19,10 @@
 
     <form th:action="@{|/${currentObject}/save/${editItem.id}|}" th:object="${editItem}" method="post">
         <fieldset>
-            <div class="mb-3" th:each="attribute: ${allAttributes}"
-                 th:with="attrLabel=${attribute.key},attrName=${attribute.value}">
-                <label class="form-label">[[${attrLabel}]]</label>
-                <input type="text" class="form-control" th:field="*{__${attrName[0]}__}">
+            <div class="mb-3" th:each="attribute: ${attributes}">
+                <label class="form-label">[[${attribute.value.getLabel()}]]</label>
+                <input th:attr="__${attribute.value.getHtmlAttributes()}__" class="form-control"
+                       th:field="*{__${attribute.key}__}">
             </div>
         </fieldset>
         <div>
