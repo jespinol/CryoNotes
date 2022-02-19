@@ -26,6 +26,7 @@
                         <label class="form-label">[[${attrLabel}]]</label>
                         <input type="text" class="form-control"
                                placeholder="Enter search term or leave empty to ignore field"
+                               th:name="${attrName}" th:id="${attrName}"
                                th:value="${__${attrName}__}">
                     </div>
                     <div>
