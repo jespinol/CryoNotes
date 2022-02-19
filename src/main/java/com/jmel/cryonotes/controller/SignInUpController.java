@@ -4,6 +4,9 @@ import com.jmel.cryonotes.model.User;
 import com.jmel.cryonotes.repository.UserRepository;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +23,19 @@ public class SignInUpController {
     @Autowired
     private UserRepository userRepository;
 
+    private boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || AnonymousAuthenticationToken.class.isAssignableFrom(authentication.getClass())) {
+            return false;
+        }
+        return authentication.isAuthenticated();
+    }
+
     @GetMapping("")
     public String viewStartPage() {
+        if (isAuthenticated()) {
+            return "/home";
+        }
         return "/login/index";
     }
 
@@ -32,7 +46,7 @@ public class SignInUpController {
     }
 
     @PostMapping("/process_register")
-    public String processRegister(@Valid User user, BindingResult bindingResult){
+    public String processRegister(@Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/login/signup_form";
         }
