@@ -1,6 +1,6 @@
 package com.jmel.cryonotes.service;
 
-import com.jmel.cryonotes.CustomUserDetails;
+import com.jmel.cryonotes.CryonotesApplication;
 import com.jmel.cryonotes.repository.UserRepository;
 import com.jmel.cryonotes.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return new CustomUserDetails(user);
+        return new CryonotesApplication.CustomUserDetails(user);
     }
 
 }

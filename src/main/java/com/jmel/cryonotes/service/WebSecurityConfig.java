@@ -1,4 +1,4 @@
-package com.jmel.cryonotes;
+package com.jmel.cryonotes.service;
 
 import com.jmel.cryonotes.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,16 +50,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.
                 authorizeRequests()
-                    .antMatchers(loginItems).permitAll()
-                    .anyRequest().authenticated()
-                    .and()
+                .antMatchers(loginItems).permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                    .loginPage("/")
-                    .defaultSuccessUrl("/home")
-                    .permitAll()
-                    .and()
+                .loginPage("/")
+                .defaultSuccessUrl("/home")
+                .permitAll()
+                .and()
                 .logout()
-                    .permitAll()
+                .permitAll()
                 .and()
                 .rememberMe().key("secretKey").tokenValiditySeconds(36000);
     }
