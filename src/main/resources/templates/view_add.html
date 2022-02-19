@@ -20,29 +20,18 @@
     </div>
 
     <form th:action="@{|/${currentObject}/save|}" th:object="${newItem}" method="post">
-        <div class="mb-3" th:each="attribute: ${allAttributes}"
-             th:with="attrLabel=${attribute.key},attrName=${attribute.value}">
-            <label class="form-label">[[${attrLabel}]]</label>
-            <input type="text" class="form-control" th:field="*{__${attrName[0]}__}">
+        <div class="mb-3" th:each="attribute: ${attributes}">
+            <label class="form-label">[[${attribute.value.getLabel()}]]</label>
+            <input th:attr="__${attribute.value.getHtmlAttributes()}__" class="form-control"
+                   th:field="*{__${attribute.key}__}" required>
         </div>
-        <!--        <div class="mb-3">-->
-        <!--            <label class="form-label">Date</label>-->
-        <!--            <input type="date" class="form-control" id="dateForm" th:field="*{date}" required>-->
-        <!--            <script>-->
-        <!--                const today = new Date();-->
-        <!--                document.getElementById('dateForm').valueAsDate = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();-->
-        <!--            </script>-->
-        <!--        </div>-->
-        <!--        <div class="mb-3">-->
-        <!--            <label class="form-label">Created by</label>-->
-        <!--            <input type="text" class="form-control" id="usernameForm" th:field="*{creator}">-->
-        <!--            <script>document.getElementById('usernameForm').value = '[[${#request.userPrincipal.principal.fullName}]]';</script>-->
-        <!--        </div>-->
-        <!--        <div class="mb-3">-->
-        <!--            <label class="form-label">Molecular weight (kDa)</label>-->
-        <!--            <input type="text" class="form-control" th:field="*{molecularWeight}">-->
-        <!--            <p th:if="${#fields.hasErrors('molecularWeight')}" class="alert-danger">Enter a numeric value, no units</p>-->
-        <!--        </div>-->
+        <script>
+            document.getElementById('creatorForm').value = '[[${#request.userPrincipal.principal.fullName}]]'
+        </script>
+        <script>
+            const today = new Date();
+            document.getElementById('dateForm').valueAsDate = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+        </script>
         <div>
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
