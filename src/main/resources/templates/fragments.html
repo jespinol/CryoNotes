@@ -43,7 +43,7 @@
                         </ul>
                     </li>
                 </ul>
-                <form th:if="${currentObject != null}" th:action="@{'/' + ${currentObject} + '/search'}" method="get">
+                <form th:if="${currentObject != null}" th:action="@{'/' + ${currentObject} + '/search/result'}" method="get">
                     <input class="form-control" type="text" placeholder="Simple search" aria-label="Search" name="keyword"
                            id="keyword" size="20" th:value="${keyword}">
                 </form>
