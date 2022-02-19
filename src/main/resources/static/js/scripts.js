@@ -8,3 +8,11 @@ function addCheckedIdsToUrl() {
     }
     location.href = ids.join('&');
 }
+
+function checkIfPasswordsMatch() {
+    if (document.getElementById('pass2').value != document.getElementById('pass1').value) {
+        document.getElementById('pass2').value = '';
+        document.getElementById('pass1').value = '';
+        alert('Passwords must match');
+    }
+}
