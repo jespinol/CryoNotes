@@ -19,95 +19,69 @@ public class SamplesController extends AbstractController<Sample> {
 
     private static final String CLASS_NAME = "com.jmel.cryonotes.model.Sample";
 
-    private static final Map<String, String> SUMMARY_ATTRIBUTES = new LinkedHashMap<>();
+    private static final Map<String, TemplateVariables> ATTRIBUTES = new LinkedHashMap<>();
 
-    static {
-        SUMMARY_ATTRIBUTES.put("Date", "date");
-        SUMMARY_ATTRIBUTES.put("Sample name", "name");
-        SUMMARY_ATTRIBUTES.put("Category", "category");
-        SUMMARY_ATTRIBUTES.put("Created by", "creator");
-        SUMMARY_ATTRIBUTES.put("M.W. (kDa)", "molecularWeight");
-        SUMMARY_ATTRIBUTES.put("Is complex", "isComplex");
-        SUMMARY_ATTRIBUTES.put("Stoichiometry", "stoichiometry");
+    class TemplateVariables {
+        String label;
+        boolean inSummary;
+        Map<String, String> htmlAttributes = new HashMap<>();
+
+        public TemplateVariables(String label, boolean inSummary) {
+            this.label = label;
+            this.inSummary = inSummary;
+        }
+
+        void addHtmlAttribute(String key, String value) {
+            htmlAttributes.put(key, value);
+        }
+
+        public String getHtmlAttributes() {
+            String output = "blank=1";
+            for (String key : htmlAttributes.keySet()) {
+                output += "," + key + "=" + htmlAttributes.get(key);
+            }
+            return output;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public boolean isInSummary() {
+            return inSummary;
+        }
     }
 
-    private static final Map<String, String[]> ATTRIBUTES = new LinkedHashMap<>();
+    {
+        TemplateVariables dateVariables = new TemplateVariables("Date", true);
+        dateVariables.addHtmlAttribute("type", "date");
+        dateVariables.addHtmlAttribute("id", "dateForm");
+        ATTRIBUTES.put("date", dateVariables);
 
-    static {
-        //key= label for fields
-        // values = [0]: attribute name, [1] attribute type, ...
-        ATTRIBUTES.put("Date", new String[]{"date"});
-        ATTRIBUTES.put("Sample name", new String[]{"name"});
-        ATTRIBUTES.put("Category", new String[]{"category"});
-        ATTRIBUTES.put("Created by", new String[]{"creator"});
-        ATTRIBUTES.put("M.W. (kDa)", new String[]{"molecularWeight"});
-        ATTRIBUTES.put("Is complex", new String[]{"isComplex"});
-        ATTRIBUTES.put("Stoichiometry", new String[]{"stoichiometry"});
-        ATTRIBUTES.put("Comments", new String[]{"comments"});
+        TemplateVariables nameVariables = new TemplateVariables("Name", true);
+        ATTRIBUTES.put("name", nameVariables);
+
+        TemplateVariables categoryVariables = new TemplateVariables("Category", true);
+        ATTRIBUTES.put("category", categoryVariables);
+
+        TemplateVariables creatorVariables = new TemplateVariables("Created by", true);
+        creatorVariables.addHtmlAttribute("id", "creatorForm");
+        ATTRIBUTES.put("creator", creatorVariables);
+
+        TemplateVariables weightVariables = new TemplateVariables("M.W. (kDa)", false);
+        weightVariables.addHtmlAttribute("type", "number");
+        weightVariables.addHtmlAttribute("min", "0");
+        ATTRIBUTES.put("molecularWeight", weightVariables);
+
+        TemplateVariables complexVariables = new TemplateVariables("Is complex", false);
+        ATTRIBUTES.put("isComplex", complexVariables);
+
+        TemplateVariables stoichiometryVariables = new TemplateVariables("Stoichiometry", false);
+        ATTRIBUTES.put("stoichiometry", stoichiometryVariables);
+
+        TemplateVariables commentsVariables = new TemplateVariables("Comments", false);
+        ATTRIBUTES.put("comments", commentsVariables);
     }
-
-//    private static final Map<String, TemplateVariables> ATTRIBUTES = new LinkedHashMap<>();
-//
-//    class TemplateVariables {
-//        String label;
-//        boolean summaryDisplay;
-//        Map<String, String> htmlAttributes = new HashMap<>();
-//
-//        public TemplateVariables(String label, boolean summaryDisplay) {
-//            this.label = label;
-//            this.summaryDisplay = summaryDisplay;
-//        }
-//
-//        public TemplateVariables(String label) {
-//            this.label = label;
-//            this.summaryDisplay = false;
-//        }
-//
-//        void addHtmlAttribute(String key, String value) {
-//            htmlAttributes.put(key, value);
-//        }
-//
-//        @Override
-//        public String toString() {
-//            String output = "";
-//            for (String key : htmlAttributes.keySet()) {
-//                output += key + "=" + htmlAttributes.get(key) + ",";
-//            }
-//            return output.substring(0, output.length() - 1);
-//        }
-//    }
-//
-//    {
-//        TemplateVariables dateVariables = new TemplateVariables("Date", true);
-//        dateVariables.addHtmlAttribute("type", "date");
-//        dateVariables.addHtmlAttribute("id", "date");
-//        ATTRIBUTES.put("date", dateVariables);
-//
-//        TemplateVariables nameVariables = new TemplateVariables("Name", true);
-//        ATTRIBUTES.put("name", nameVariables);
-//
-//        TemplateVariables categoryVariables = new TemplateVariables("Category", true);
-//        ATTRIBUTES.put("category", categoryVariables);
-//
-//        TemplateVariables creatorVariables = new TemplateVariables("Created by", true);
-//        creatorVariables.addHtmlAttribute("id", "creator");
-//        ATTRIBUTES.put("creator", creatorVariables);
-//
-//        TemplateVariables weightVariables = new TemplateVariables("M.W. (kDa)", false);
-//        weightVariables.addHtmlAttribute("type", "number");
-//        weightVariables.addHtmlAttribute("min", "1");
-//        ATTRIBUTES.put("molecularWeight", weightVariables);
-//
-//        TemplateVariables complexVariables = new TemplateVariables("Is complex", false);
-//        ATTRIBUTES.put("isComplex", complexVariables);
-//
-//        TemplateVariables stoichiometryVariables = new TemplateVariables("Stoichiometry", false);
-//        ATTRIBUTES.put("stoichiometry", stoichiometryVariables);
-//
-//        TemplateVariables commentsVariables = new TemplateVariables("Comments", false);
-//        commentsVariables.addHtmlAttribute("type", "textarea");
-//        ATTRIBUTES.put("comments", commentsVariables);
-//    }
 
     @Autowired
     SampleRepository repository;
@@ -123,11 +97,7 @@ public class SamplesController extends AbstractController<Sample> {
         return CLASS_NAME;
     }
 
-    Map<String, String> getSummaryAttributes() {
-        return SUMMARY_ATTRIBUTES;
-    }
-
-    Map<String, String[]> getAllAttributes() {
+    Map<String, TemplateVariables> getAttributes() {
         return ATTRIBUTES;
     }
 
