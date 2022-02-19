@@ -39,9 +39,7 @@ public abstract class AbstractController<T> {
 
     Class<?> cls = Class.forName(getClassName());
 
-    abstract Map<String, String> getSummaryAttributes();
-
-    abstract Map<String, String[]> getAllAttributes();
+    abstract Map<String, SamplesController.TemplateVariables> getAttributes();
 
     public PageRequest getPaging(Integer pageNo, Integer pageSize, String sortBy, String ascending) {
         if (ascending.equals("true")) {
@@ -66,7 +64,7 @@ public abstract class AbstractController<T> {
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("totalRows", page.getTotalElements());
         model.addAttribute("pageSize", pageSize);
-        model.addAttribute("summaryAttributes", getSummaryAttributes());
+        model.addAttribute("attributes", getAttributes());
         return "view_all";
     }
 
@@ -75,14 +73,13 @@ public abstract class AbstractController<T> {
         Optional<T> optional = getRepository().findById(id);
         T editItem = optional.get();
         model.addAttribute("editItem", editItem);
-        model.addAttribute("allAttributes", getAllAttributes());
+        model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
         return "view_edit";
     }
 
     @GetMapping("/{ids}")
     public String viewDetails(Model model, @PathVariable String ids) {
-        System.out.println(ids);
         String[] idsStrArr = ids.split("&");
         List<Long> idsLongArr = new ArrayList<>();
         for (String str : idsStrArr) {
@@ -90,7 +87,7 @@ public abstract class AbstractController<T> {
         }
         List<T> selectedItems = (List<T>) getRepository().findAllById(idsLongArr);
         model.addAttribute("selectedItems", selectedItems);
-        model.addAttribute("allAttributes", getAllAttributes());
+        model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
         return "view_details";
     }
@@ -98,7 +95,7 @@ public abstract class AbstractController<T> {
     @GetMapping("/add")
     public String add(Model model) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         model.addAttribute("newItem", cls.getDeclaredConstructor().newInstance());
-        model.addAttribute("allAttributes", getAllAttributes());
+        model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
         return "view_add";
     }
@@ -120,21 +117,21 @@ public abstract class AbstractController<T> {
             return viewEdit(model, id);
         }
         getRepository().save(object);
-        return viewAll(model, 0, 20, "id", "false");
+        return viewDetails(model, String.valueOf(id));
     }
 
     @GetMapping("/search/result")
     public String searchSimple(Model model, @RequestParam(value = "keyword") String keyword) {
         List<T> searchResults = getSearch(keyword);
         model.addAttribute("searchResults", searchResults);
-        model.addAttribute("summaryAttributes", getSummaryAttributes());
+        model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
         return "view_search";
     }
 
     @GetMapping("/advanced_search")
     public String advancedSearchView(Model model) {
-        model.addAttribute("allAttributes", getAllAttributes());
+        model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
         return "advanced_search";
     }
@@ -143,7 +140,7 @@ public abstract class AbstractController<T> {
     public String searchAdvanced(Model model, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("category") String category, @RequestParam("creator") String creator, @RequestParam(value = "molecularWeight", defaultValue = "-1") int molecularWeight, @RequestParam("isComplex") String iscComplex, @RequestParam(value = "stoichiometry") String stoichiometry, @Param("comments") String comments) {
         List<T> searchResults = getAdvancedSearch(date, name, category, creator, molecularWeight, iscComplex, stoichiometry, comments);
         model.addAttribute("searchResults", searchResults);
-        model.addAttribute("summaryAttributes", getSummaryAttributes());
+        model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
         return "view_search";
     }
