@@ -24,10 +24,8 @@
                     <div class="mb-3" th:each="attribute: ${allAttributes}"
                          th:with="attrLabel=${attribute.key},attrName=${attribute.value}">
                         <label class="form-label">[[${attrLabel}]]</label>
-                        <input type="text" class="form-control"
-                               placeholder="Enter search term or leave empty to ignore field"
-                               th:name="${attrName}" th:id="${attrName}"
-                               th:value="${__${attrName}__}">
+                        <input type="text" class="form-control" placeholder="Enter search term for field"
+                               th:name="${attrName[0]}">
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">Search</button>
