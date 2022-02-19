@@ -17,7 +17,7 @@ public interface SampleRepository extends PagingAndSortingRepository<Sample, Lon
             "AND (:name IS null OR s.name LIKE %:name%)" +
             "AND (:category IS null OR s.category LIKE %:category%)" +
             "AND (:creator IS null OR s.creator LIKE %:creator%)" +
-            "AND (s.molecularWeight = :molecularWeight OR (:molecularWeight = -1 AND s.molecularWeight > 0))" +
+            "AND (s.molecularWeight = :molecularWeight OR (:molecularWeight < 0 AND s.molecularWeight > 0))" +
             "AND (:isComplex IS null OR s.isComplex LIKE %:isComplex% )" +
             "AND (:stoichiometry IS null OR s.stoichiometry LIKE %:stoichiometry% )" +
             "AND (:comments IS null OR s.comments LIKE %:comments%)")
