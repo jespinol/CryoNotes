@@ -3,6 +3,7 @@ package com.jmel.cryonotes.controller;
 import com.jmel.cryonotes.model.Sample;
 import com.jmel.cryonotes.repository.SampleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -72,6 +73,11 @@ public class SamplesController extends AbstractController<Sample> {
 
     @Override
     public List<Sample> getSearch(String keyword) {
-        return repository.search(keyword);
+        return repository.simpleSearch(keyword);
+    }
+
+    @Override
+    public List<Sample> getAdvancedSearch(String date, String name, String category, String creator, int molecularWeight, String iscComplex, String stoichiometry, String comments) {
+        return repository.advancedSearch(date, name, category, creator, molecularWeight, iscComplex, stoichiometry, comments);
     }
 }

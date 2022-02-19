@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,8 @@ public abstract class AbstractController<T> {
     abstract PagingAndSortingRepository<T, Long> getRepository();
 
     abstract List<T> getSearch(String keyword);
+
+    abstract List<T> getAdvancedSearch(String date, String name, String category, String creator, int molecularWeight, String iscComplex, String stoichiometry, String comments);
 
     abstract String getClassName();
 
@@ -123,9 +126,25 @@ public abstract class AbstractController<T> {
         return viewAll(model, 0, 20, "id", "false");
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search/result")
     public String searchSimple(Model model, @RequestParam(value = "keyword") String keyword) {
         List<T> searchResults = getSearch(keyword);
+        model.addAttribute("searchResults", searchResults);
+        model.addAttribute("summaryAttributes", getSummaryAttributes());
+        model.addAttribute("currentObject", getViewName());
+        return "view_search";
+    }
+
+    @GetMapping("/advanced_search")
+    public String advancedSearchView(Model model) {
+        model.addAttribute("allAttributes", getAllAttributes());
+        model.addAttribute("currentObject", getViewName());
+        return "advanced_search";
+    }
+
+    @GetMapping("/advanced_search/result")
+    public String searchAdvanced(Model model, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("category") String category, @RequestParam("creator") String creator, @RequestParam(value = "molecularWeight", defaultValue = "-1") int molecularWeight, @RequestParam("isComplex") String iscComplex, @RequestParam(value = "stoichiometry") String stoichiometry, @Param("comments") String comments) {
+        List<T> searchResults = getAdvancedSearch(date, name, category, creator, molecularWeight, iscComplex, stoichiometry, comments);
         model.addAttribute("searchResults", searchResults);
         model.addAttribute("summaryAttributes", getSummaryAttributes());
         model.addAttribute("currentObject", getViewName());
