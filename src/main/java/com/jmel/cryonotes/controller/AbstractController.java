@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 public abstract class AbstractController<T> {
@@ -44,7 +41,7 @@ public abstract class AbstractController<T> {
 
     abstract Map<String, String> getSummaryAttributes();
 
-    abstract Map<String, String> getAllAttributes();
+    abstract Map<String, String[]> getAllAttributes();
 
     public PageRequest getPaging(Integer pageNo, Integer pageSize, String sortBy, String ascending) {
         if (ascending.equals("true")) {
