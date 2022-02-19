@@ -21,11 +21,11 @@
         <div class="row">
             <div>
                 <form th:action="@{|/${currentObject}/advanced_search/result|}" method="get">
-                    <div class="mb-3" th:each="attribute: ${allAttributes}"
-                         th:with="attrLabel=${attribute.key},attrName=${attribute.value}">
-                        <label class="form-label">[[${attrLabel}]]</label>
-                        <input type="text" class="form-control" placeholder="Enter search term for field"
-                               th:name="${attrName[0]}">
+                    <div class="mb-3" th:each="attribute: ${attributes}">
+                        <label class="form-label">[[${attribute.value.getLabel()}]]</label>
+                        <input th:attr="__${attribute.value.getHtmlAttributes()}__" class="form-control"
+                               placeholder="Enter search term for field"
+                               th:name="${attribute.key}">
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">Search</button>
