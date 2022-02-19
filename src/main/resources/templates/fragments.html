@@ -42,11 +42,28 @@
                             <li><a class="dropdown-item" href="#">Validation</a></li>
                         </ul>
                     </li>
+
                 </ul>
-                <form th:if="${currentObject != null}" th:action="@{'/' + ${currentObject} + '/search/result'}" method="get">
-                    <input class="form-control" type="text" placeholder="Simple search" aria-label="Search" name="keyword"
-                           id="keyword" size="20" th:value="${keyword}">
-                </form>
+                <ul class="navbar-nav align-items-center" th:if="${currentObject != null}">
+                    <li class="nav-item">
+                        <form class="input-group" th:action="@{|/${currentObject}/search/result|}"
+                              method="get">
+                            <input type="text" class="form-control" th:placeholder="|Search in ${currentObject}|"
+                                   name="keyword" id="keyword" size="20" th:value="${keyword}">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary navbar btn-sm" type="submit">&#x1f50d;
+                                </button>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="nav-item ps-3">
+                        <a th:href="@{|/${currentObject}/advanced_search|}">
+                            <button type="submit" class="btn navbar-btn btn-secondary btn-sm">Advanced
+                                &#x1f50d;
+                            </button>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -93,21 +110,23 @@
 
 <div th:fragment="pagination" class="d-flex">
     <div class="btn-group dropup">
-            <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown">Rows per page &nbsp;</button>
-            <ul class="dropdown-menu dropdown-menu-end" style="min-width: 60px !important;">
-                <li><a class="dropdown-item"
-                       th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=5'}">5</a>
-                </li>
-                <li><a class="dropdown-item"
-                       th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=20'}">20</a>
-                </li>
-                <li><a class="dropdown-item"
-                       th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=100'}">100</a>
-                </li>
-                <li><a class="dropdown-item"
-                       th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=100'}">All</a>
-                </li>
-            </ul>
+        <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" type="button"
+                data-bs-toggle="dropdown">Rows per page &nbsp;
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" style="min-width: 60px !important;">
+            <li><a class="dropdown-item"
+                   th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=5'}">5</a>
+            </li>
+            <li><a class="dropdown-item"
+                   th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=20'}">20</a>
+            </li>
+            <li><a class="dropdown-item"
+                   th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=100'}">100</a>
+            </li>
+            <li><a class="dropdown-item"
+                   th:href="@{'/' + ${currentObject} + '/all?pageNo=0' + '&ascending=' + ${ascending} + '&sortBy=' + ${sortBy} + '&pageSize=100'}">All</a>
+            </li>
+        </ul>
     </div>
     <div class="pagination ms-auto">
         <li class="page-item">
