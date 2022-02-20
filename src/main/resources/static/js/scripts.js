@@ -1,4 +1,4 @@
-function addCheckedIdsToUrl() {
+function addCheckedIdsToUrl(currentObject) {
     let checkboxes = document.getElementsByClassName('checkedId')
     let ids = new Array();
     for (let i = 0; i < checkboxes.length; i++) {
@@ -6,7 +6,7 @@ function addCheckedIdsToUrl() {
             ids.push(checkboxes[i].value);
         }
     }
-    location.href = ids.join('&');
+    location.href = "http://localhost:8080/" + currentObject + "/details?ids=" + ids.join(',');
 }
 
 function checkIfPasswordsMatch() {
