@@ -2,6 +2,7 @@ package com.jmel.cryonotes.controller;
 
 import com.jmel.cryonotes.model.Sample;
 import com.jmel.cryonotes.repository.SampleRepository;
+import com.jmel.cryonotes.service.TemplateVariables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,37 +21,6 @@ public class SamplesController extends AbstractController<Sample> {
     private static final String CLASS_NAME = "com.jmel.cryonotes.model.Sample";
 
     private static final Map<String, TemplateVariables> ATTRIBUTES = new LinkedHashMap<>();
-
-    class TemplateVariables {
-        String label;
-        boolean inSummary;
-        Map<String, String> htmlAttributes = new HashMap<>();
-
-        public TemplateVariables(String label, boolean inSummary) {
-            this.label = label;
-            this.inSummary = inSummary;
-        }
-
-        void addHtmlAttribute(String key, String value) {
-            htmlAttributes.put(key, value);
-        }
-
-        public String getHtmlAttributes() {
-            String output = "blank=1";
-            for (String key : htmlAttributes.keySet()) {
-                output += "," + key + "=" + htmlAttributes.get(key);
-            }
-            return output;
-        }
-
-        public String getLabel() {
-            return label;
-        }
-
-        public boolean isInSummary() {
-            return inSummary;
-        }
-    }
 
     {
         TemplateVariables dateVariables = new TemplateVariables("Date", true);

@@ -1,6 +1,7 @@
 package com.jmel.cryonotes.controller;
 
 import com.jmel.cryonotes.repository.SampleRepository;
+import com.jmel.cryonotes.service.TemplateVariables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,7 +40,7 @@ public abstract class AbstractController<T> {
 
     Class<?> cls = Class.forName(getClassName());
 
-    abstract Map<String, SamplesController.TemplateVariables> getAttributes();
+    abstract Map<String, TemplateVariables> getAttributes();
 
     public PageRequest getPaging(Integer pageNo, Integer pageSize, String sortBy, String ascending) {
         if (ascending.equals("true")) {
@@ -53,8 +54,7 @@ public abstract class AbstractController<T> {
                           @RequestParam(defaultValue = "0") Integer pageNo,
                           @RequestParam(defaultValue = "20") Integer pageSize,
                           @RequestParam(defaultValue = "id") String sortBy,
-                          @RequestParam(defaultValue = "false") String ascending
-    ) {
+                          @RequestParam(defaultValue = "false") String ascending) {
         Page<T> page = getRepository().findAll(getPaging(pageNo, pageSize, sortBy, ascending));
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("allItems", page.getContent());
@@ -68,19 +68,18 @@ public abstract class AbstractController<T> {
         return "view_all";
     }
 
-    @GetMapping("/edit/{id}")
-    public String viewEdit(Model model, @PathVariable Long id) {
-        Optional<T> optional = getRepository().findById(id);
-        T editItem = optional.get();
-        model.addAttribute("editItem", editItem);
+    @GetMapping("/add")
+    public String add(Model model) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        model.addAttribute("newItem", cls.getDeclaredConstructor().newInstance());
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
-        return "view_edit";
+        return "add";
     }
 
-    @GetMapping("/{ids}")
-    public String viewDetails(Model model, @PathVariable String ids) {
-        String[] idsStrArr = ids.split("&");
+    @GetMapping("/details")
+    public String viewDetails(Model model, @RequestParam("ids") String ids) {
+        System.out.println(ids);
+        String[] idsStrArr = ids.split(",");
         List<Long> idsLongArr = new ArrayList<>();
         for (String str : idsStrArr) {
             idsLongArr.add(Long.parseLong(str));
@@ -92,41 +91,43 @@ public abstract class AbstractController<T> {
         return "view_details";
     }
 
-    @GetMapping("/add")
-    public String add(Model model) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        model.addAttribute("newItem", cls.getDeclaredConstructor().newInstance());
+    @GetMapping("/edit")
+    public String edit(Model model, @RequestParam("id") Long id) {
+        Optional<T> optional = getRepository().findById(id);
+        T editItem = optional.get();
+        model.addAttribute("editItem", editItem);
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
-        return "view_add";
+        return "edit";
     }
 
     @PostMapping("/save")
     public String save(@Valid T object, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("currentObject", getViewName());
-            return "view_add";
+            return "add";
         }
         getRepository().save(object);
         return viewAll(model, 0, 20, "id", "false");
     }
 
     @PostMapping("/save/{id}")
-    public String editSave(@Valid T object, BindingResult bindingResult, Model model, @PathVariable Long id) {
+    public String save(@Valid T object, BindingResult bindingResult, Model model, @PathVariable Long id) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("currentObject", getViewName());
-            return viewEdit(model, id);
+            return edit(model, id);
         }
         getRepository().save(object);
         return viewDetails(model, String.valueOf(id));
     }
 
     @GetMapping("/search/result")
-    public String searchSimple(Model model, @RequestParam(value = "keyword") String keyword) {
+    public String searchSimple(Model model, @RequestParam("keyword") String keyword) {
         List<T> searchResults = getSearch(keyword);
         model.addAttribute("searchResults", searchResults);
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
-        return "view_search";
+        return "search_results";
     }
 
     @GetMapping("/advanced_search")
@@ -142,7 +143,7 @@ public abstract class AbstractController<T> {
         model.addAttribute("searchResults", searchResults);
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
-        return "view_search";
+        return "search_results";
     }
 
 }

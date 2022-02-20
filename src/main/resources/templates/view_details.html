@@ -23,7 +23,7 @@
                 <div class="d-flex">
                     <div><h5 th:text="${item.name}"></h5></div>
                     <div class="ms-auto">
-                        <a th:href="@{|/${currentObject}/edit/${item.id}|}"><input
+                        <a th:href="@{|/${currentObject}/edit?id=${item.id}|}"><input
                                 class="btn btn-secondary navbar-btn btn-sm" type="button"
                                 value="Edit"/></a>
                     </div>
