@@ -5,9 +5,11 @@ import com.jmel.cryonotes.repository.SampleRepository;
 import com.jmel.cryonotes.service.TemplateVariables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,7 @@ public class SamplesController extends AbstractController<Sample> {
 
     private static final Map<String, TemplateVariables> ATTRIBUTES = new LinkedHashMap<>();
 
-    {
+    static {
         TemplateVariables dateVariables = new TemplateVariables("Date", true);
         dateVariables.addHtmlAttribute("type", "date");
         dateVariables.addHtmlAttribute("id", "dateForm");
@@ -81,8 +83,17 @@ public class SamplesController extends AbstractController<Sample> {
         return repository.simpleSearch(keyword);
     }
 
-    @Override
-    public List<Sample> getAdvancedSearch(String date, String name, String category, String creator, int molecularWeight, String iscComplex, String stoichiometry, String comments) {
-        return repository.advancedSearch(date, name, category, creator, molecularWeight, iscComplex, stoichiometry, comments);
+//    //    @Override
+//    public List<Sample> getAdvancedSearch(String date, String name, String category, String creator, int molecularWeight, String iscComplex, String stoichiometry, String comments) {
+//        return repository.advancedSearch(date, name, category, creator, molecularWeight, iscComplex, stoichiometry, comments);
+//    }
+
+    @GetMapping("/advanced_search/result")
+    public String searchAdvanced(Model model, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("category") String category, @RequestParam("creator") String creator, @RequestParam(value = "molecularWeight", defaultValue = "-1") int molecularWeight, @RequestParam("isComplex") String iscComplex, @RequestParam(value = "stoichiometry") String stoichiometry, @RequestParam("comments") String comments) {
+        List<Sample> searchResults = repository.advancedSearch(date, name, category, creator, molecularWeight, iscComplex, stoichiometry, comments);
+        model.addAttribute("searchResults", searchResults);
+        model.addAttribute("attributes", getAttributes());
+        model.addAttribute("currentObject", getViewName());
+        return "search_results";
     }
 }

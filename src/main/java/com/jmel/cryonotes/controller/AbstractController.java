@@ -34,7 +34,9 @@ public abstract class AbstractController<T> {
 
     abstract List<T> getSearch(String keyword);
 
-    abstract List<T> getAdvancedSearch(String date, String name, String category, String creator, int molecularWeight, String iscComplex, String stoichiometry, String comments);
+//    abstract List<T> getAdvancedSearch(String date, String name, String category, String creator, int molecularWeight, String iscComplex, String stoichiometry, String comments);
+//
+//    abstract List<T> getAdvancedSearch(String name, String type, String facility, int voltage, double cs, String detectors, String comments);
 
     abstract String getClassName();
 
@@ -136,14 +138,4 @@ public abstract class AbstractController<T> {
         model.addAttribute("currentObject", getViewName());
         return "advanced_search";
     }
-
-    @GetMapping("/advanced_search/result")
-    public String searchAdvanced(Model model, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("category") String category, @RequestParam("creator") String creator, @RequestParam(value = "molecularWeight", defaultValue = "-1") int molecularWeight, @RequestParam("isComplex") String iscComplex, @RequestParam(value = "stoichiometry") String stoichiometry, @Param("comments") String comments) {
-        List<T> searchResults = getAdvancedSearch(date, name, category, creator, molecularWeight, iscComplex, stoichiometry, comments);
-        model.addAttribute("searchResults", searchResults);
-        model.addAttribute("attributes", getAttributes());
-        model.addAttribute("currentObject", getViewName());
-        return "search_results";
-    }
-
 }
