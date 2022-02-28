@@ -55,7 +55,8 @@
                                                           th:value="${item.id}"></label>
                     </td>
                     <td th:each="attribute: ${attributes}" th:if="${attribute.value.isInSummary()}">
-                        [[${item.__${attribute.key}__}]]
+                        <a th:if="${attribute.value.isDropdown()}">[[${item.__${attribute.key}__.name}]]</a>
+                        <a th:unless="${attribute.value.isDropdown()}">[[${item.__${attribute.key}__}]]</a>
                     </td>
                 </tr>
                 </tbody>

@@ -31,7 +31,11 @@
                 <fieldset disabled>
                     <div class="mb-3" th:each="attribute: ${attributes}">
                         <label class="form-label">[[${attribute.value.getLabel()}]]</label>
-                        <input class="form-control" style="background-color: white;"
+                        <input th:if="${attribute.value.isDropdown()}" class="form-control"
+                               style="background-color: white;"
+                               th:value="${item.__${attribute.key}__.name}">
+                        <input th:unless="${attribute.value.isDropdown()}" class="form-control"
+                               style="background-color: white;"
                                th:value="${item.__${attribute.key}__}">
                     </div>
                 </fieldset>
