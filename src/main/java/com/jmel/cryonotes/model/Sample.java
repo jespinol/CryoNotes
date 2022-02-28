@@ -2,7 +2,10 @@ package com.jmel.cryonotes.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "samples")
@@ -19,6 +22,9 @@ public class Sample extends AbstractEntity {
 
     @Column
     private String comments;
+
+    @OneToMany(mappedBy = "sample")
+    private final List<Screening> screenings = new ArrayList<>();
 
     public int getMolecularWeight() {
         return molecularWeight;
@@ -50,5 +56,9 @@ public class Sample extends AbstractEntity {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public List<Screening> getScreenings() {
+        return screenings;
     }
 }

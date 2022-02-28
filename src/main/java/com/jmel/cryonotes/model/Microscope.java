@@ -3,6 +3,8 @@ package com.jmel.cryonotes.model;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "microscopes")
@@ -37,6 +39,9 @@ public class Microscope {
 
     @Column
     private String comments;
+
+    @OneToMany(mappedBy = "microscope")
+    private final List<Screening> screenings = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -100,5 +105,9 @@ public class Microscope {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public List<Screening> getScreenings() {
+        return screenings;
     }
 }

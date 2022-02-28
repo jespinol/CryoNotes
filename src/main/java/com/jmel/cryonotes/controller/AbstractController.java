@@ -1,5 +1,6 @@
 package com.jmel.cryonotes.controller;
 
+import com.jmel.cryonotes.repository.MicroscopeRepository;
 import com.jmel.cryonotes.repository.SampleRepository;
 import com.jmel.cryonotes.service.TemplateVariables;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public abstract class AbstractController<T> {
 
     @Autowired
     SampleRepository sampleRepository;
+
+    @Autowired
+    MicroscopeRepository microscopeRepository;
 
     protected AbstractController() throws ClassNotFoundException {
     }
@@ -75,6 +79,8 @@ public abstract class AbstractController<T> {
         model.addAttribute("newItem", cls.getDeclaredConstructor().newInstance());
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
+        model.addAttribute("sample", sampleRepository.findAll());
+        model.addAttribute("microscope", microscopeRepository.findAll());
         return "add";
     }
 

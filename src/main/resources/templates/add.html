@@ -22,7 +22,12 @@
     <form th:action="@{|/${currentObject}/save|}" th:object="${newItem}" method="post">
         <div class="mb-3" th:each="attribute: ${attributes}">
             <label class="form-label">[[${attribute.value.getLabel()}]]</label>
-            <input th:attr="__${attribute.value.getHtmlAttributes()}__" class="form-control"
+            <select th:if="${attribute.value.isDropdown()}" th:field="*{__${attribute.key}__}">
+                <option th:each="option: ${sample}" th:value="${option.id}"
+                        th:text="${option.name}"></option>
+            </select>
+            <input th:unless="${attribute.value.isDropdown()}" th:attr="__${attribute.value.getHtmlAttributes()}__"
+                   class="form-control"
                    th:field="*{__${attribute.key}__}" required>
         </div>
         <script>

@@ -2,17 +2,20 @@ package com.jmel.cryonotes.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "screening")
-public class Screening extends AbstractEntity{
+public class Screening extends AbstractEntity {
 
-    @Column
-    @NotBlank
+    @ManyToOne
+    @NotNull
+    private Sample sample;
+
+    @NotNull
     private String microscope;
 
-    @Column
-    @NotBlank
+    @NotNull
     private String grid;
 
     @Column
@@ -27,6 +30,14 @@ public class Screening extends AbstractEntity{
 
     @Column
     private String comments;
+
+    public Sample getSample() {
+        return sample;
+    }
+
+    public void setSample(Sample sample) {
+        this.sample = sample;
+    }
 
     public String getMicroscope() {
         return microscope;

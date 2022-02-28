@@ -40,10 +40,14 @@ public class ScreeningsController extends AbstractController<Screening> {
         creatorVariables.addHtmlAttribute("id", "creatorForm");
         ATTRIBUTES.put("creator", creatorVariables);
 
-        TemplateVariables microscopeVariables = new TemplateVariables("Microscope", true);
+        TemplateVariables sampleVariables = new TemplateVariables("Sample", true, true);
+        sampleVariables.addHtmlAttribute("id", "sample");
+        ATTRIBUTES.put("sample", sampleVariables);
+
+        TemplateVariables microscopeVariables = new TemplateVariables("Microscope", true, false);
         ATTRIBUTES.put("microscope", microscopeVariables);
 
-        TemplateVariables gridVariables = new TemplateVariables("Grid", true);
+        TemplateVariables gridVariables = new TemplateVariables("Grid", true, false);
         ATTRIBUTES.put("grid", gridVariables);
 
         TemplateVariables resultVariables = new TemplateVariables("Main Result", true);
