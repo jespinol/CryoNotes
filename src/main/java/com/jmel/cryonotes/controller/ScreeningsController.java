@@ -92,8 +92,8 @@ public class ScreeningsController extends AbstractController<Screening> {
     }
 
     @GetMapping("/advanced_search/result")
-    public String searchAdvanced(Model model, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("category") String category, @RequestParam("creator") String creator, @RequestParam("microscope") String microscope, @RequestParam("grid") String grid, @RequestParam("result") String result, @RequestParam("wasCollected") String wasCollected, @RequestParam("wasStored") String wasStored, @RequestParam("comments") String comments) {
-        List<Screening> searchResults = repository.advancedSearch(date, name, category, creator, microscope, grid, result, wasCollected, wasStored, comments);
+    public String searchAdvanced(Model model, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("category") String category, @RequestParam("creator") String creator, @RequestParam(value = "sample", defaultValue = "-1") int sample, @RequestParam(value = "microscope", defaultValue = "-1") int microscope, @RequestParam("grid") String grid, @RequestParam("result") String result, @RequestParam("wasCollected") String wasCollected, @RequestParam("wasStored") String wasStored, @RequestParam("comments") String comments) {
+        List<Screening> searchResults = repository.advancedSearch(date, name, category, creator, grid, result, wasCollected, wasStored, comments);
         model.addAttribute("searchResults", searchResults);
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
