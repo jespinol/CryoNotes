@@ -12,8 +12,9 @@ public class Screening extends AbstractEntity {
     @NotNull
     private Sample sample;
 
+    @ManyToOne
     @NotNull
-    private String microscope;
+    private Microscope microscope;
 
     @NotNull
     private String grid;
@@ -39,11 +40,11 @@ public class Screening extends AbstractEntity {
         this.sample = sample;
     }
 
-    public String getMicroscope() {
+    public Microscope getMicroscope() {
         return microscope;
     }
 
-    public void setMicroscope(String microscope) {
+    public void setMicroscope(Microscope microscope) {
         this.microscope = microscope;
     }
 

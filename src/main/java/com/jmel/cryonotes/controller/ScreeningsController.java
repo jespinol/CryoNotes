@@ -44,7 +44,7 @@ public class ScreeningsController extends AbstractController<Screening> {
         sampleVariables.addHtmlAttribute("id", "sample");
         ATTRIBUTES.put("sample", sampleVariables);
 
-        TemplateVariables microscopeVariables = new TemplateVariables("Microscope", true, false);
+        TemplateVariables microscopeVariables = new TemplateVariables("Microscope", true, true);
         ATTRIBUTES.put("microscope", microscopeVariables);
 
         TemplateVariables gridVariables = new TemplateVariables("Grid", true, false);

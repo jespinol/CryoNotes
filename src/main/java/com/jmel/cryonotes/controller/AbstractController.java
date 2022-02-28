@@ -106,6 +106,8 @@ public abstract class AbstractController<T> {
         model.addAttribute("editItem", editItem);
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
+        model.addAttribute("sample", sampleRepository.findAll());
+        model.addAttribute("microscope", microscopeRepository.findAll());
         return "edit";
     }
 
