@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 public abstract class AbstractController<T> {
@@ -37,10 +39,6 @@ public abstract class AbstractController<T> {
     abstract PagingAndSortingRepository<T, Long> getRepository();
 
     abstract List<T> getSearch(String keyword);
-
-//    abstract List<T> getAdvancedSearch(String date, String name, String category, String creator, int molecularWeight, String iscComplex, String stoichiometry, String comments);
-//
-//    abstract List<T> getAdvancedSearch(String name, String type, String facility, int voltage, double cs, String detectors, String comments);
 
     abstract String getClassName();
 
