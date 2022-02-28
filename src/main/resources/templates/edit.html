@@ -21,13 +21,18 @@
         <fieldset>
             <div class="mb-3" th:each="attribute: ${attributes}">
                 <label class="form-label">[[${attribute.value.getLabel()}]]</label>
-                <select th:if="${attribute.value.isDropdown()}" th:field="*{__${attribute.key}__}">
-                    <option th:each="option: ${__${attribute.key}__}" th:value="${option.id}"
-                            th:text="${option.name}"></option>
-                </select>
-                <input th:unless="${attribute.value.isDropdown()}" th:attr="__${attribute.value.getHtmlAttributes()}__"
-                       class="form-control"
-                       th:field="*{__${attribute.key}__}" required>
+                <div th:if="${attribute.value.isDropdown()}">
+                    <input class="form-control" th:list="|${attribute}Options|" placeholder="Start typing..."
+                           th:field="*{__${attribute.key}__}">
+                    <datalist class="form-control d-none" th:id="|${attribute}Options|">
+                        <option th:each="option: ${__${attribute.key}__}" th:value="${option.id}"
+                                th:text="${option.name}"></option>
+                    </datalist>
+                </div>
+                <div th:unless="${attribute.value.isDropdown()}">
+                    <input th:attr="__${attribute.value.getHtmlAttributes()}__"
+                           class="form-control" th:field="*{__${attribute.key}__}" required>
+                </div>
             </div>
         </fieldset>
         <div>
