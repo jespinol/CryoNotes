@@ -144,6 +144,8 @@ public abstract class AbstractController<T> {
     public String advancedSearchView(Model model) {
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
+        model.addAttribute("sample", sampleRepository.findAll());
+        model.addAttribute("microscope", microscopeRepository.findAll());
         return "advanced_search";
     }
 }

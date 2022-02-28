@@ -23,8 +23,14 @@
                 <form th:action="@{|/${currentObject}/advanced_search/result|}" method="get">
                     <div class="mb-3" th:each="attribute: ${attributes}">
                         <label class="form-label">[[${attribute.value.getLabel()}]]</label>
-                        <input th:attr="__${attribute.value.getHtmlAttributes()}__" class="form-control"
-                               placeholder="Enter search term for field"
+                        <select th:if="${attribute.value.isDropdown()}" th:name="${attribute.key}">
+                            <option value=""></option>
+                            <option th:each="option: ${__${attribute.key}__}" th:value="${option.id}"
+                                    th:text="${option.name}"></option>
+                        </select>
+                        <input th:unless="${attribute.value.isDropdown()}"
+                               th:attr="__${attribute.value.getHtmlAttributes()}__"
+                               class="form-control"
                                th:name="${attribute.key}">
                     </div>
                     <div>
