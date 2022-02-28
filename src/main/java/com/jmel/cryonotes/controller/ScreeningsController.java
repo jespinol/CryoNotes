@@ -30,7 +30,7 @@ public class ScreeningsController extends AbstractController<Screening> {
         dateVariables.addHtmlAttribute("id", "dateForm");
         ATTRIBUTES.put("date", dateVariables);
 
-        TemplateVariables nameVariables = new TemplateVariables("Name", true);
+        TemplateVariables nameVariables = new TemplateVariables("Short description", true);
         ATTRIBUTES.put("name", nameVariables);
 
         TemplateVariables categoryVariables = new TemplateVariables("Category", true);
