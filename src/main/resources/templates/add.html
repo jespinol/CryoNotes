@@ -25,9 +25,10 @@
             <div th:if="${attribute.value.isDropdown()}">
                 <input class="form-control" th:list="|${attribute}Options|" placeholder="Start typing..."
                        th:field="*{__${attribute.key}__}">
-                <datalist class="form-control d-none" th:id="|${attribute}Options|">
-                    <option th:each="option: ${__${attribute.key}__}" th:value="${option.id}"
-                            th:text="${option.name}"></option>
+                <datalist class="form-control d-none" th:id="|__${attribute}__Options|">
+                    <option th:each="option: ${__${attribute.key}__}" th:value="${option.id}">[[${option.name}]]
+                    </option>
+                    </script>
                 </datalist>
             </div>
             <!--            <div th:if="${attribute.value.isDropdown()}">-->

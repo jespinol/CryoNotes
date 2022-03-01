@@ -24,7 +24,7 @@
                     <div class="mb-3" th:each="attribute: ${attributes}">
                         <label class="form-label">[[${attribute.value.getLabel()}]]</label>
                         <div th:if="${attribute.value.isDropdown()}">
-                            <input class="form-control" th:list="|${attribute}Options|"
+                            <input class="form-control disabled" th:list="|${attribute}Options|"
                                    placeholder="Type search term, or leave empty"
                                    th:name="${attribute.key}">
                             <datalist class="form-control d-none" th:id="|${attribute}Options|">
