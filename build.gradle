@@ -1,8 +1,9 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.3'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
-	id 'war'
+    id 'org.springframework.boot' version '2.6.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'war'
+    id "com.microsoft.azure.azurewebapp" version "1.1.0"
 }
 
 group = 'com.jmel'
@@ -10,23 +11,36 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-	implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.6'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'mysql:mysql-connector-java'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.6'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'mysql:mysql-connector-java'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
+}
+
+azurewebapp {
+    subscription = '8793d036-decb-4b48-934e-fcca9a5dd5b8'
+    resourceGroup = 'cryonotes'
+    appName = 'cryonotesv1'
+    pricingTier = 'P1v2'
+    region = 'westus'
+    runtime {
+        os = 'Linux'
+        webContainer = 'Tomcat 9.0'
+        javaVersion = 'Java 8'
+    }
 }
