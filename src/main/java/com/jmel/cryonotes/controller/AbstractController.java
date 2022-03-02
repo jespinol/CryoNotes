@@ -131,15 +131,6 @@ public abstract class AbstractController<T> {
         return viewDetails(model, String.valueOf(id));
     }
 
-//    @GetMapping("/search/result")
-//    public String searchSimple(Model model, @RequestParam("keyword") String keyword) {
-//        List<T> searchResults = getSearch(keyword);
-//        model.addAttribute("searchResults", searchResults);
-//        model.addAttribute("attributes", getAttributes());
-//        model.addAttribute("currentObject", getViewName());
-//        return "search_results";
-//    }
-
     @GetMapping("/search/result")
     public String searchSimple(Model model,
                                @RequestParam("keyword") String keyword,

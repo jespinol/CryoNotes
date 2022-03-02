@@ -14,8 +14,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class SignInUpController {
@@ -57,11 +59,6 @@ public class SignInUpController {
         return "/login/index";
     }
 
-//    @ExceptionHandler(ConstraintViolationException.class)
-//    public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException e, WebRequest request) {
-//        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-//    }
-
     @ExceptionHandler(ConstraintViolationException.class)
     public String handleConstraintViolation() {
         return "redirect:/register";
@@ -71,5 +68,13 @@ public class SignInUpController {
     @GetMapping("/home")
     public String listUsers(Model model) {
         return "/home";
+    }
+
+    @GetMapping("/edit_profile")
+    public String edit(Model model, @RequestParam("id") Long id) {
+        Optional<User> optional = userRepository.findById(id);
+        User editItem = optional.get();
+        model.addAttribute("editItem", editItem);
+        return "edit_profile";
     }
 }

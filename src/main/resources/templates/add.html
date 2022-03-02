@@ -31,12 +31,6 @@
                     </script>
                 </datalist>
             </div>
-            <!--            <div th:if="${attribute.value.isDropdown()}">-->
-            <!--                <select th:field="*{__${attribute.key}__}">-->
-            <!--                    <option th:each="option: ${__${attribute.key}__}" th:value="${option.id}"-->
-            <!--                            th:text="${option.name}"></option>-->
-            <!--                </select>-->
-            <!--            </div>-->
             <div th:unless="${attribute.value.isDropdown()}">
                 <input th:attr="__${attribute.value.getHtmlAttributes()}__"
                        class="form-control" th:field="*{__${attribute.key}__}" required>
