@@ -6,6 +6,7 @@ import com.jmel.cryonotes.service.TemplateVariables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.ui.Model;
@@ -38,7 +39,7 @@ public abstract class AbstractController<T> {
 
     abstract PagingAndSortingRepository<T, Long> getRepository();
 
-    abstract List<T> getSearch(String keyword);
+    abstract Page<T> getSearch(String keyword, Pageable pageable);
 
     abstract String getClassName();
 
@@ -61,6 +62,8 @@ public abstract class AbstractController<T> {
                           @RequestParam(defaultValue = "false") String ascending) {
         Page<T> page = getRepository().findAll(getPaging(pageNo, pageSize, sortBy, ascending));
         model.addAttribute("currentObject", getViewName());
+        model.addAttribute("viewType", "all?");
+        model.addAttribute("attributes", getAttributes());
         model.addAttribute("allItems", page.getContent());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
@@ -68,7 +71,6 @@ public abstract class AbstractController<T> {
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("totalRows", page.getTotalElements());
         model.addAttribute("pageSize", pageSize);
-        model.addAttribute("attributes", getAttributes());
         return "view_all";
     }
 
@@ -129,12 +131,35 @@ public abstract class AbstractController<T> {
         return viewDetails(model, String.valueOf(id));
     }
 
+//    @GetMapping("/search/result")
+//    public String searchSimple(Model model, @RequestParam("keyword") String keyword) {
+//        List<T> searchResults = getSearch(keyword);
+//        model.addAttribute("searchResults", searchResults);
+//        model.addAttribute("attributes", getAttributes());
+//        model.addAttribute("currentObject", getViewName());
+//        return "search_results";
+//    }
+
     @GetMapping("/search/result")
-    public String searchSimple(Model model, @RequestParam("keyword") String keyword) {
-        List<T> searchResults = getSearch(keyword);
+    public String searchSimple(Model model,
+                               @RequestParam("keyword") String keyword,
+                               @RequestParam(defaultValue = "0") Integer pageNo,
+                               @RequestParam(defaultValue = "20") Integer pageSize,
+                               @RequestParam(defaultValue = "id") String sortBy,
+                               @RequestParam(defaultValue = "false") String ascending) {
+        Pageable pageRequest = getPaging(pageNo, pageSize, sortBy, ascending);
+        Page<T> searchResults = getSearch(keyword, pageRequest);
         model.addAttribute("searchResults", searchResults);
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
+        model.addAttribute("viewType", "search/result?keyword=" + keyword +"&");
+        model.addAttribute("allItems", searchResults.getContent());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", searchResults.getTotalPages());
+        model.addAttribute("ascending", ascending);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("totalRows", searchResults.getTotalElements());
+        model.addAttribute("pageSize", pageSize);
         return "search_results";
     }
 

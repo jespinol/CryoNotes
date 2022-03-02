@@ -4,6 +4,8 @@ import com.jmel.cryonotes.model.Microscope;
 import com.jmel.cryonotes.repository.MicroscopeRepository;
 import com.jmel.cryonotes.service.TemplateVariables;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,14 +80,10 @@ public class MicroscopesController extends AbstractController<Microscope> {
     }
 
     @Override
-    public List<Microscope> getSearch(String keyword) {
-        return repository.simpleSearch(keyword);
+    public Page<Microscope> getSearch(String keyword, Pageable pageable) {
+        return repository.simpleSearch(keyword, pageable);
     }
 
-//    //        @Override
-//    public List<Microscope> getAdvancedSearch(String name, String type, String facility, int voltage, double cs, String detectors, String comments) {
-//        return repository.advancedSearch(name, type, facility, voltage, cs, detectors, comments);
-//    }
 
     @GetMapping("/advanced_search/result")
     public String searchAdvanced(Model model, @RequestParam("name") String name, @RequestParam("type") String type, @RequestParam("facility") String facility, @RequestParam(value = "voltage", defaultValue = "-1") int voltage, @RequestParam(value = "cs", defaultValue = "-1") double cs, @RequestParam("detectors") String detectors, @RequestParam("comments") String comments) {

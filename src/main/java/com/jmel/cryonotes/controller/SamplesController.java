@@ -4,6 +4,8 @@ import com.jmel.cryonotes.model.Sample;
 import com.jmel.cryonotes.repository.SampleRepository;
 import com.jmel.cryonotes.service.TemplateVariables;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,14 +81,9 @@ public class SamplesController extends AbstractController<Sample> {
     }
 
     @Override
-    public List<Sample> getSearch(String keyword) {
-        return repository.simpleSearch(keyword);
+    public Page<Sample> getSearch(String keyword, Pageable pageable) {
+        return repository.simpleSearch(keyword, pageable);
     }
-
-//    //    @Override
-//    public List<Sample> getAdvancedSearch(String date, String name, String category, String creator, int molecularWeight, String iscComplex, String stoichiometry, String comments) {
-//        return repository.advancedSearch(date, name, category, creator, molecularWeight, iscComplex, stoichiometry, comments);
-//    }
 
     @GetMapping("/advanced_search/result")
     public String searchAdvanced(Model model, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("category") String category, @RequestParam("creator") String creator, @RequestParam(value = "molecularWeight", defaultValue = "-1") int molecularWeight, @RequestParam("isComplex") String iscComplex, @RequestParam(value = "stoichiometry") String stoichiometry, @RequestParam("comments") String comments) {

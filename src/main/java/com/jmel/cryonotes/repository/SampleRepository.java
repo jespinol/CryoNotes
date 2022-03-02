@@ -1,6 +1,8 @@
 package com.jmel.cryonotes.repository;
 
 import com.jmel.cryonotes.model.Sample;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +11,7 @@ import java.util.List;
 
 public interface SampleRepository extends PagingAndSortingRepository<Sample, Long> {
     @Query("SELECT s FROM Sample s WHERE CONCAT(s.date, s.name, s.category, s.creator, s.molecularWeight, s.isComplex, s.stoichiometry, s.comments) LIKE CONCAT('%',:keyword,'%')")
-    List<Sample> simpleSearch(@Param("keyword") String keyword);
+    Page<Sample> simpleSearch(@Param("keyword") String keyword, Pageable pageable);
 
     @Query("SELECT s FROM Sample s " +
             "WHERE (:date IS null OR s.date LIKE %:date%) " +

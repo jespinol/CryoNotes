@@ -4,6 +4,8 @@ import com.jmel.cryonotes.model.Screening;
 import com.jmel.cryonotes.repository.ScreeningRepository;
 import com.jmel.cryonotes.service.TemplateVariables;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -87,8 +89,8 @@ public class ScreeningsController extends AbstractController<Screening> {
     }
 
     @Override
-    public List<Screening> getSearch(String keyword) {
-        return repository.simpleSearch(keyword);
+    public Page<Screening> getSearch(String keyword, Pageable pageable) {
+        return repository.simpleSearch(keyword, pageable);
     }
 
     @GetMapping("/advanced_search/result")
