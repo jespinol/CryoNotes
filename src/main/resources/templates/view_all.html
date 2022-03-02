@@ -40,12 +40,7 @@
                     </th>
                     <th scope="row" th:each="attribute: ${attributes}" th:if="${attribute.value.isInSummary()}">
                         [[${attribute.value.getLabel()}]]
-                        <div class="btn-group">
-                            <a th:href="@{|/${currentObject}/all?sortBy=${attribute.key}&ascending=true|}"
-                               class="text-decoration-none text-dark fw-light">&#x25B2;</a>
-                            <a th:href="@{|/${currentObject}/all?sortBy=${attribute.key}&ascending=false|}"
-                               class="text-decoration-none text-dark fw-light">&#x25BC;</a>
-                        </div>
+                        <div th:replace="fragments :: sorting-buttons"></div>
                     </th>
                 </tr>
                 </thead>

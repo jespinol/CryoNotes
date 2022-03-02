@@ -38,6 +38,7 @@
                     </th>
                     <th scope="row" th:each="attribute: ${attributes}" th:if="${attribute.value.isInSummary()}">
                         [[${attribute.value.getLabel()}]]
+                        <div th:replace="fragments :: sorting-buttons"></div>
                     </th>
                 </tr>
                 </thead>
@@ -56,6 +57,7 @@
         </form>
     </div>
 
+    <div th:replace="fragments :: pagination"></div>
 </div>
 
 <div th:replace="fragments :: page-footer"></div>
