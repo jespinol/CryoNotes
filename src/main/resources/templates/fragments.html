@@ -115,40 +115,47 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-end" style="min-width: 60px !important;">
             <li><a class="dropdown-item"
-                   th:href="@{|/${currentObject}/all?pageNo=0&ascending=${ascending}&sortBy=${sortBy}&pageSize=5|}">5</a>
+                   th:href="@{|/${currentObject}/${viewType}pageNo=0&ascending=${ascending}&sortBy=${sortBy}&pageSize=5|}">5</a>
             </li>
             <li><a class="dropdown-item"
-                   th:href="@{|/${currentObject}/all?pageNo=0&ascending=${ascending}&sortBy=${sortBy}&pageSize=20|}">20</a>
+                   th:href="@{|/${currentObject}/${viewType}pageNo=0&ascending=${ascending}&sortBy=${sortBy}&pageSize=20|}">20</a>
             </li>
             <li><a class="dropdown-item"
-                   th:href="@{|/${currentObject}/all?pageNo=0&ascending=${ascending}&sortBy=${sortBy}&pageSize=100|}">100</a>
+                   th:href="@{|/${currentObject}/${viewType}pageNo=0&ascending=${ascending}&sortBy=${sortBy}&pageSize=100|}">100</a>
             </li>
             <li><a class="dropdown-item"
-                   th:href="@{|/${currentObject}/all?pageNo=0&ascending=${ascending}&sortBy=${sortBy}&pageSize=999|}">All</a>
+                   th:href="@{|/${currentObject}/${viewType}pageNo=0&ascending=${ascending}&sortBy=${sortBy}&pageSize=999|}">All</a>
             </li>
         </ul>
     </div>
     <div class="pagination ms-auto">
         <li class="page-item">
             <a class="page-link" th:if="${currentPage > 0}"
-               th:href="@{|/${currentObject}/all?pageNo=${currentPage - 1}&ascending=${ascending}&sortBy=${sortBy}&pageSize=${pageSize}|}">Previous</a>
+               th:href="@{|/${currentObject}/${viewType}pageNo=${currentPage - 1}&ascending=${ascending}&sortBy=${sortBy}&pageSize=${pageSize}|}">Previous</a>
             <a class="page-link" th:unless="${currentPage > 0}" style="color: gray"> Previous</a>
         </li>
 
         <li class="page-item" th:each="i: ${#numbers.sequence(0, totalPages -1)}">
             <a class="page-link" th:if="${currentPage != i}"
-               th:href="@{|/${currentObject}/all?pageNo=${i}&ascending=${ascending}&sortBy=${sortBy}&pageSize=${pageSize}|}">[[${i
+               th:href="@{|/${currentObject}/${viewType}pageNo=${i}&ascending=${ascending}&sortBy=${sortBy}&pageSize=${pageSize}|}">[[${i
                 + 1}]]</a>
             <a class="page-link" th:unless="${currentPage != i}"
-               th:href="@{|/${currentObject}/all?pageNo=${i}&ascending=${ascending}&sortBy=${sortBy}&pageSize=${pageSize}|}"
+               th:href="@{|/${currentObject}/${viewType}pageNo=${i}&ascending=${ascending}&sortBy=${sortBy}&pageSize=${pageSize}|}"
                style="color: gray">[[${i + 1}]]</a>
         </li>
         <li class="page-item">
             <a class="page-link" th:if="${currentPage < totalPages - 1}"
-               th:href="@{|/${currentObject}/all?pageNo=${currentPage + 1}&ascending=${ascending}&sortBy=${sortBy}&pageSize=${pageSize}|}">Next</a>
+               th:href="@{|/${currentObject}/${viewType}pageNo=${currentPage + 1}&ascending=${ascending}&sortBy=${sortBy}&pageSize=${pageSize}|}">Next</a>
             <a class="page-link" th:unless="${currentPage < totalPages -1}" style="color:gray">Next</a>
         </li>
     </div>
+</div>
+
+<div th:fragment="sorting-buttons" class="btn-group">
+    <a th:href="@{|/${currentObject}/${viewType}sortBy=${attribute.key}&ascending=true&pageSize=${pageSize}|}"
+       class="text-decoration-none text-dark fw-light">&#x25B2;</a>
+    <a th:href="@{|/${currentObject}/${viewType}sortBy=${attribute.key}&ascending=false&pageSize=${pageSize}|}"
+       class="text-decoration-none text-dark fw-light">&#x25BC;</a>
 </div>
 </body>
 </html>
