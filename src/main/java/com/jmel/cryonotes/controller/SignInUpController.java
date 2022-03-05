@@ -32,7 +32,7 @@ public class SignInUpController {
         return authentication.isAuthenticated();
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public String viewStartPage() {
         if (isAuthenticated()) {
             return "/home";
