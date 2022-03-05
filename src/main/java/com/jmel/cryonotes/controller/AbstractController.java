@@ -1,5 +1,6 @@
 package com.jmel.cryonotes.controller;
 
+import com.jmel.cryonotes.repository.GridRepository;
 import com.jmel.cryonotes.repository.MicroscopeRepository;
 import com.jmel.cryonotes.repository.SampleRepository;
 import com.jmel.cryonotes.service.TemplateVariables;
@@ -31,6 +32,9 @@ public abstract class AbstractController<T> {
 
     @Autowired
     MicroscopeRepository microscopeRepository;
+
+    @Autowired
+    GridRepository gridRepository;
 
     protected AbstractController() throws ClassNotFoundException {
     }
@@ -108,6 +112,7 @@ public abstract class AbstractController<T> {
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("sample", sampleRepository.findAll());
         model.addAttribute("microscope", microscopeRepository.findAll());
+        model.addAttribute("grid", gridRepository.findAll());
         return "edit";
     }
 
@@ -160,6 +165,7 @@ public abstract class AbstractController<T> {
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("sample", sampleRepository.findAll());
         model.addAttribute("microscope", microscopeRepository.findAll());
+        model.addAttribute("grid", gridRepository.findAll());
         return "advanced_search";
     }
 }

@@ -26,6 +26,9 @@ public class Sample extends AbstractEntity {
     @OneToMany(mappedBy = "sample")
     private final List<Screening> screenings = new ArrayList<>();
 
+    @OneToMany(mappedBy = "sample")
+    private final List<Grid> grids = new ArrayList<>();
+
     public int getMolecularWeight() {
         return molecularWeight;
     }
@@ -60,5 +63,8 @@ public class Sample extends AbstractEntity {
 
     public List<Screening> getScreenings() {
         return screenings;
+    }
+
+    public List<Grid> getGrids() {return grids;
     }
 }
