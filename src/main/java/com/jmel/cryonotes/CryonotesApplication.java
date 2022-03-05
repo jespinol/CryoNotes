@@ -3,14 +3,20 @@ package com.jmel.cryonotes;
 import com.jmel.cryonotes.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 @SpringBootApplication
-public class CryonotesApplication {
+public class CryonotesApplication extends SpringBootServletInitializer {
 
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(CryonotesApplication .class);
+    }
     public static void main(String[] args) {
         SpringApplication.run(CryonotesApplication.class, args);
     }
