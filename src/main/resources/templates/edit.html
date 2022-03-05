@@ -19,6 +19,8 @@
 
     <form th:action="@{|/${currentObject}/save/${editItem.id}|}" th:object="${editItem}" method="post">
         <fieldset>
+            <div class="alert alert-danger" th:if="${saveError}">There was an error while saving the changes, try again.
+            </div>
             <div class="mb-3" th:each="attribute: ${attributes}">
                 <label class="form-label">[[${attribute.value.getLabel()}]]</label>
                 <div th:if="${attribute.value.isDropdown()}">
