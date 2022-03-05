@@ -86,11 +86,22 @@ public class SamplesController extends AbstractController<Sample> {
     }
 
     @GetMapping("/advanced_search/result")
-    public String searchAdvanced(Model model, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("category") String category, @RequestParam("creator") String creator, @RequestParam(value = "molecularWeight", defaultValue = "-1") int molecularWeight, @RequestParam("isComplex") String iscComplex, @RequestParam(value = "stoichiometry") String stoichiometry, @RequestParam("comments") String comments) {
-        List<Sample> searchResults = repository.advancedSearch(date, name, category, creator, molecularWeight, iscComplex, stoichiometry, comments);
+    public String searchAdvanced(Model model, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("category") String category, @RequestParam("creator") String creator, @RequestParam(value = "molecularWeight", defaultValue = "-1") int molecularWeight, @RequestParam("isComplex") String iscComplex, @RequestParam(value = "stoichiometry") String stoichiometry, @RequestParam("comments") String comments,
+                                 @RequestParam(defaultValue = "0") Integer pageNo,
+                                 @RequestParam(defaultValue = "20") Integer pageSize,
+                                 @RequestParam(defaultValue = "id") String sortBy,
+                                 @RequestParam(defaultValue = "false") String ascending) {
+        Pageable pageRequest = getPaging(pageNo, pageSize, sortBy, ascending);
+        Page<Sample> searchResults = repository.advancedSearch(pageRequest, date, name, category, creator, molecularWeight, iscComplex, stoichiometry, comments);
         model.addAttribute("searchResults", searchResults);
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", searchResults.getTotalPages());
+        model.addAttribute("ascending", ascending);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("totalRows", searchResults.getTotalElements());
+        model.addAttribute("pageSize", pageSize);
         return "search_results";
     }
 }

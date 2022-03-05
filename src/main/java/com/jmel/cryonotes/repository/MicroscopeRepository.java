@@ -21,5 +21,5 @@ public interface MicroscopeRepository extends PagingAndSortingRepository<Microsc
             "AND (s.cs = :cs OR (:cs < 0 AND s.cs > 0))" +
             "AND (:detectors IS null OR s.detectors LIKE %:detectors% )" +
             "AND (:comments IS null OR s.comments LIKE %:comments%)")
-    List<Microscope> advancedSearch(@Param("name") String name, @Param("type") String type, @Param("facility") String facility, @Param("voltage") int voltage, @Param("cs") double cs, @Param("detectors") String detectors, @Param("comments") String comments);
+    Page<Microscope> advancedSearch(Pageable pageable, @Param("name") String name, @Param("type") String type, @Param("facility") String facility, @Param("voltage") int voltage, @Param("cs") double cs, @Param("detectors") String detectors, @Param("comments") String comments);
 }

@@ -22,5 +22,5 @@ public interface SampleRepository extends PagingAndSortingRepository<Sample, Lon
             "AND (:isComplex IS null OR s.isComplex LIKE %:isComplex% )" +
             "AND (:stoichiometry IS null OR s.stoichiometry LIKE %:stoichiometry% )" +
             "AND (:comments IS null OR s.comments LIKE %:comments%)")
-    List<Sample> advancedSearch(@Param("date") String date, @Param("name") String name, @Param("category") String category, @Param("creator") String creator, @Param("molecularWeight") int molecularWeight, @Param("isComplex") String iscComplex, @Param("stoichiometry") String stoichiometry, @Param("comments") String comments);
+    Page<Sample> advancedSearch(Pageable pageable, @Param("date") String date, @Param("name") String name, @Param("category") String category, @Param("creator") String creator, @Param("molecularWeight") int molecularWeight, @Param("isComplex") String iscComplex, @Param("stoichiometry") String stoichiometry, @Param("comments") String comments);
 }
