@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 public class SignInUpController {
@@ -71,10 +70,20 @@ public class SignInUpController {
     }
 
     @GetMapping("/edit_profile")
-    public String edit(Model model, @RequestParam("id") Long id) {
-        Optional<User> optional = userRepository.findById(id);
-        User editItem = optional.get();
-        model.addAttribute("editItem", editItem);
+    public String edit(Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = ((UserDetails) principal).getUsername();
+        User user = userRepository.findByEmail(email);
+        model.addAttribute("user", user);
         return "edit_profile";
+    }
+
+    @PostMapping("/save_profile")
+    public String saveChangesSimple(@Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/edit_profile";
+        }
+        userRepository.save(user);
+        return "/home";
     }
 }
