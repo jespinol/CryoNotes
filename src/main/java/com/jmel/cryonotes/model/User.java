@@ -13,20 +13,20 @@ public class User {
 
     @Column(unique = true)
     @Email
-    @NotBlank
+    @NotBlank (message = "Email cannot be blank")
     private String email;
 
     @Column
-    @NotBlank
-    @Size(min=6, max=64)
+    @NotBlank(message = "Password cannot be blank")
+    @Size(min=6, max=64, message = "Password must contain at least 6 characters")
     private String password;
 
     @Column
-    @NotBlank
+    @NotBlank(message = "Name cannot be blank")
     private String firstName;
 
     @Column
-    @NotBlank
+    @NotBlank(message = "Lastname cannot be blank")
     private String lastName;
 
     public String getPassword() {
@@ -59,5 +59,9 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
