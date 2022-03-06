@@ -33,7 +33,7 @@ azurewebapp {
     resourceGroup = 'cryonotes'
     appName = 'cryonotes'
     pricingTier = 'P1v2'
-    region = 'eastus'
+    region = 'westus'
     runtime {
         os = 'Linux'
         webContainer = 'Tomcat 9.0'
