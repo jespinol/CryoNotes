@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar cryonotes.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar *.jar
