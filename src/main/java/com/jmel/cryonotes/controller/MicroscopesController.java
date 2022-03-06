@@ -86,11 +86,21 @@ public class MicroscopesController extends AbstractController<Microscope> {
 
 
     @GetMapping("/advanced_search/result")
-    public String searchAdvanced(Model model, @RequestParam("name") String name, @RequestParam("type") String type, @RequestParam("facility") String facility, @RequestParam(value = "voltage", defaultValue = "-1") int voltage, @RequestParam(value = "cs", defaultValue = "-1") double cs, @RequestParam("detectors") String detectors, @RequestParam("comments") String comments) {
-        List<Microscope> searchResults = repository.advancedSearch(name, type, facility, voltage, cs, detectors, comments);
+    public String searchAdvanced(Model model, @RequestParam("name") String name, @RequestParam("type") String type, @RequestParam("facility") String facility, @RequestParam(value = "voltage", defaultValue = "-1") int voltage, @RequestParam(value = "cs", defaultValue = "-1") double cs, @RequestParam("detectors") String detectors, @RequestParam("comments") String comments, @RequestParam(defaultValue = "0") Integer pageNo,
+                                 @RequestParam(defaultValue = "20") Integer pageSize,
+                                 @RequestParam(defaultValue = "id") String sortBy,
+                                 @RequestParam(defaultValue = "false") String ascending) {
+        Pageable pageRequest = getPaging(pageNo, pageSize, sortBy, ascending);
+        Page<Microscope> searchResults = repository.advancedSearch(pageRequest, name, type, facility, voltage, cs, detectors, comments);
         model.addAttribute("searchResults", searchResults);
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", searchResults.getTotalPages());
+        model.addAttribute("ascending", ascending);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("totalRows", searchResults.getTotalElements());
+        model.addAttribute("pageSize", pageSize);
         return "search_results";
     }
 }

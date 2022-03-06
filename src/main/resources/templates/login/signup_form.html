@@ -39,7 +39,8 @@
                     <p class="text-center fw-bold mx-3 mb-0">Sign up</p>
                 </div>
                 <form th:action="@{/process_register}" th:object="${user}" method="post">
-
+                    <div class="alert alert-danger" th:if="${signUpError}">There was an error while creating account, try again.
+                    </div>
                     <div class="form-outline mb-4">
                         <input type="text" th:field="*{firstName}" required class="form-control form-control-lg"
                                placeholder="Name" autofocus/>

@@ -24,5 +24,5 @@ public interface ScreeningRepository extends PagingAndSortingRepository<Screenin
             "AND (:wasCollected IS null OR s.wasCollected LIKE %:wasCollected% )" +
             "AND (:wasStored IS null OR s.wasStored LIKE %:wasStored% )" +
             "AND (:comments IS null OR s.comments LIKE %:comments%)")
-    List<Screening> advancedSearch(@Param("date") String date, @Param("name") String name, @Param("category") String category, @Param("creator") String creator, @Param("grid") String grid, @Param("result") String result, @Param("wasCollected") String wasCollected, @Param("wasStored") String wasStored, @Param("comments") String comments);
+    Page<Screening> advancedSearch(Pageable pageable, @Param("date") String date, @Param("name") String name, @Param("category") String category, @Param("creator") String creator, @Param("grid") String grid, @Param("result") String result, @Param("wasCollected") String wasCollected, @Param("wasStored") String wasStored, @Param("comments") String comments);
 }

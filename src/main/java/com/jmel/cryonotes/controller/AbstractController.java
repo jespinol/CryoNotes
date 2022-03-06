@@ -1,5 +1,6 @@
 package com.jmel.cryonotes.controller;
 
+import com.jmel.cryonotes.repository.GridRepository;
 import com.jmel.cryonotes.repository.MicroscopeRepository;
 import com.jmel.cryonotes.repository.SampleRepository;
 import com.jmel.cryonotes.service.TemplateVariables;
@@ -31,6 +32,9 @@ public abstract class AbstractController<T> {
 
     @Autowired
     MicroscopeRepository microscopeRepository;
+
+    @Autowired
+    GridRepository gridRepository;
 
     protected AbstractController() throws ClassNotFoundException {
     }
@@ -108,6 +112,7 @@ public abstract class AbstractController<T> {
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("sample", sampleRepository.findAll());
         model.addAttribute("microscope", microscopeRepository.findAll());
+        model.addAttribute("grid", gridRepository.findAll());
         return "edit";
     }
 
@@ -115,9 +120,11 @@ public abstract class AbstractController<T> {
     public String save(@Valid T object, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("currentObject", getViewName());
+            model.addAttribute("saveError", true);
             return "add";
         }
         getRepository().save(object);
+        model.addAttribute("saveSuccess", true);
         return viewAll(model, 0, 20, "id", "false");
     }
 
@@ -125,9 +132,11 @@ public abstract class AbstractController<T> {
     public String save(@Valid T object, BindingResult bindingResult, Model model, @PathVariable Long id) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("currentObject", getViewName());
+            model.addAttribute("saveError", true);
             return edit(model, id);
         }
         getRepository().save(object);
+        model.addAttribute("saveSuccess", true);
         return viewDetails(model, String.valueOf(id));
     }
 
@@ -160,6 +169,7 @@ public abstract class AbstractController<T> {
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("sample", sampleRepository.findAll());
         model.addAttribute("microscope", microscopeRepository.findAll());
+        model.addAttribute("grid", gridRepository.findAll());
         return "advanced_search";
     }
 }

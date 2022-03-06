@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -78,12 +79,26 @@ public class SignInUpController {
         return "edit_profile";
     }
 
+//    @PostMapping("/save_profile")
+//    public String saveChangesSimple(@Valid User user, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return "/edit_profile";
+//        }
+//        userRepository.save(user);
+//        return "/home";
+//    }
+
     @PostMapping("/save_profile")
-    public String saveChangesSimple(@Valid User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String changeUserPassword(User user, @RequestParam("password") String password, @RequestParam("oldpassword") String oldPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (passwordEncoder.matches(oldPassword, user.getPassword())) {
+            System.out.println("Passwords matched");
+            String encodedPassword = passwordEncoder.encode(password);
+            user.setPassword(encodedPassword);
+            userRepository.save(user);
+        } else {
             return "/edit_profile";
         }
-        userRepository.save(user);
         return "/home";
     }
 }
