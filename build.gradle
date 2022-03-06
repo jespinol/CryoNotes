@@ -26,11 +26,26 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+    compile 'com.github.jsimone:webapp-runner:8.5.11.3'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+task stage() {
+    dependsOn clean, war
+}
+war.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+    into "$buildDir/server"
+    from(configurations.compile) {
+        include "webapp-runner*"
+    }
+}
+
+stage.dependsOn(copyToLib)
 
 azurewebapp {
     subscription = '8793d036-decb-4b48-934e-fcca9a5dd5b8'
