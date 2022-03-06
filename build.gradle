@@ -3,7 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'war'
-//    id "com.microsoft.azure.azurewebapp" version "1.1.0"
+    id "com.microsoft.azure.azurewebapp" version "1.1.0"
 }
 
 group = 'com.jmel'
@@ -28,33 +28,15 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
 }
 
-//tasks.named('test') {
-//    useJUnitPlatform()
-//}
-//
-//task copyToLib(type: Copy) {
-//    into "$buildDir/libs"
-//    from(configurations.compile)
-//}
-//
-//stage.dependsOn(copyToLib)
-//
-//radle.taskGraph.whenReady {
-//    taskGraph ->
-//        if (taskGraph.hasTask(stage)) {
-//            test.enabled = false
-//        }
-//}
-
-//azurewebapp {
-//    subscription = '8793d036-decb-4b48-934e-fcca9a5dd5b8'
-//    resourceGroup = 'cryonotes'
-//    appName = 'cryonotes'
-//    pricingTier = 'P1v2'
-//    region = 'eastus'
-//    runtime {
-//        os = 'Linux'
-//        webContainer = 'Tomcat 9.0'
-//        javaVersion = 'Java 8'
-//    }
-//}
+azurewebapp {
+    subscription = '8793d036-decb-4b48-934e-fcca9a5dd5b8'
+    resourceGroup = 'cryonotes'
+    appName = 'cryonotes'
+    pricingTier = 'P1v2'
+    region = 'eastus'
+    runtime {
+        os = 'Linux'
+        webContainer = 'Tomcat 9.0'
+        javaVersion = 'Java 8'
+    }
+}
