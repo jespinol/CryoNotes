@@ -33,7 +33,7 @@ public class SignInUpController {
         return authentication.isAuthenticated();
     }
 
-    @GetMapping("")
+    @GetMapping(value={"/", "/home"})
     public String viewStartPage() {
         if (isAuthenticated()) {
             return "/home";
@@ -56,17 +56,17 @@ public class SignInUpController {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userRepository.save(user);
-        return "/login/index";
+        return viewStartPage();
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public String handleConstraintViolation() {
-        return "redirect:/register";
+    public String handleConstraintViolation(Model model) {
+        model.addAttribute("emailExists", true);
+        return showRegistrationForm(model);
     }
 
-
-    @GetMapping("/home")
-    public String listUsers(Model model) {
+    @PostMapping("/")
+    public String loginUser() {
         return "/home";
     }
 
