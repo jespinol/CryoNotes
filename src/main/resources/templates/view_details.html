@@ -29,6 +29,7 @@
                     </div>
                 </div>
                 <fieldset disabled>
+                    <div class="alert alert-success" th:if="${saveSuccess}">The changes were saved successfully.</div>
                     <div class="mb-3" th:each="attribute: ${attributes}">
                         <label class="form-label">[[${attribute.value.getLabel()}]]</label>
                         <input th:if="${attribute.value.isDropdown()}" class="form-control"
