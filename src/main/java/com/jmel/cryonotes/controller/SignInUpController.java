@@ -83,15 +83,12 @@ public class SignInUpController {
         Optional<User> optionalUser = userRepository.findById(id);
         User dbUser = optionalUser.get();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println("new pass " + newPassword);
         if (passwordEncoder.matches(password, dbUser.getPassword())) {
             if (newPassword.equals("")) {
-                System.out.println("not changing pass");
                 dbUser.setFirstName(firstName);
                 dbUser.setLastName(lastName);
                 dbUser.setEmail(email);
             } else if (newPassword.length() >= 6) {
-                System.out.println("changing pass");
                 dbUser.setFirstName(firstName);
                 dbUser.setLastName(lastName);
                 dbUser.setEmail(email);
@@ -103,7 +100,6 @@ public class SignInUpController {
             model.addAttribute("saveError", true);
             return edit(model);
         }
-        System.out.println("trying to log out");
         SecurityContextHolder.getContext().setAuthentication(null);
         model.addAttribute("saveSuccess", true);
         return "redirect:/home";
