@@ -33,7 +33,11 @@
                                 ids.push(checkboxes[i].value);
                             }
                         }
-                        location.href = "/" + currentObject + "/details?ids=" + ids.join(',');
+                        if (ids.length > 0) {
+                            location.href = "/" + currentObject + "/details?ids=" + ids.join(',');
+                        } else {
+                            alert('Select at least one entry to view details');
+                        }
                     }
                 </script>
             </a>

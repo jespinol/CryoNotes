@@ -133,7 +133,6 @@ public class GridsController extends AbstractController<Grid>{
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
         model.addAttribute("viewType", "advanced_search/result?" + "date=" + date + "&" + "name=" + name + "&" + "category=" + category + "&" + "creator=" + creator + "&" + "concentration=" + concentration + "&" + "buffer=" + buffer + "&" + "salt=" + salt + "&" + "additives=" + additives + "&" + "sampleComments=" + sampleComments + "&" + "gridMaterial=" + gridMaterial + "&" + "glowDischarge=" + glowDischarge + "&" + "vitrificationComments=" + vitrificationComments + "&" + "storageComments=" + storageComments + "&" + "comments=" + comments + "&");
-
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", searchResults.getTotalPages());
         model.addAttribute("ascending", ascending);
