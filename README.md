@@ -11,19 +11,31 @@ parameters, and results of different cryoEM experiments. My expectation is that 
 location will aid in planning and executing cryoEM experiments.
 
 ## Features
-User authentication: A new user can create an account with their information. A valid user must log in to access the app.<br/>
-Update user profile: An authenticated user can change their names, email, and/or password by.<br/>
-Record information: Different steps of a cryoEM experiment are separated into pages. The user can access those pages and record information related to each step.<br/>
-View and edit information: The user has a sortable summary view with all the entries in table form. The number of rows can be changed. The user can select one entry to view additonal information for that entry and, if desired, edit it.<br/> 
-Compare information: The user can select multiple entries from the table view and compare all the data side by side.<br/>
-Search: The user can search a keyword across any field, or use the advance search feature where they can look for specific keywords in chosen fields.<br/> 
+* User authentication
+    * A new user can create an account with their information 
+    * A valid user must log in to access the app
+* Update user profile
+  * An authenticated user can change their names, email, and/or password by
+* Record information
+  * Different steps of a cryoEM experiment are separated into pages
+  * The user can access those pages and record information related to each step
+* View and edit information
+  * The user has a sortable summary view with all the entries in table form
+  * The number of rows can be changed
+  * The user can select one entry to view additional information for that entry and, if desired, edit it
+* Compare information
+  * The user can select multiple entries from the table view and compare all the data side by side
+* Search
+  * The user can search a keyword across any field
+  * Or use the advance search feature where they can look for specific keywords in chosen fields
+
 
 ## Technologies
-Java<br/>
-Spring Boot <br/>
-Thymeleaf<br/>
-HTML<br/>
-CSS<br/>
-Bootstrap
-mySQL<br/>
-Microsoft Azure
+* Java<br/>
+* Spring Boot <br/>
+* Thymeleaf<br/>
+* HTML<br/>
+* CSS<br/>
+* Bootstrap
+* mySQL<br/>
+* Microsoft Azure
