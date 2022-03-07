@@ -65,6 +65,7 @@
                         <input type="password" id="pass1" th:field="*{password}" required
                                class="form-control form-control-lg"
                                placeholder="Enter password"/>
+                        <p>Password must be at least 6 characters in length</p>
                         <p th:if="${#fields.hasErrors('password')}" class="alert-danger">Requirements: between 6 and 64
                             characters</p>
                     </div>
