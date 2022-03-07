@@ -90,7 +90,6 @@ public abstract class AbstractController<T> {
 
     @GetMapping("/details")
     public String viewDetails(Model model, @RequestParam("ids") String ids) {
-        System.out.println(ids);
         String[] idsStrArr = ids.split(",");
         List<Long> idsLongArr = new ArrayList<>();
         for (String str : idsStrArr) {

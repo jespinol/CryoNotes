@@ -95,6 +95,7 @@ public class MicroscopesController extends AbstractController<Microscope> {
         model.addAttribute("searchResults", searchResults);
         model.addAttribute("attributes", getAttributes());
         model.addAttribute("currentObject", getViewName());
+        model.addAttribute("viewType", "advanced_search/result?" + "name=" + name + "&" + "type=" + type + "&" + "facility=" + facility + "&" + "voltage=" + voltage + "&" + "cs=" + cs + "&" + "detectors=" + detectors + "&" + "comments=" + comments + "&");
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", searchResults.getTotalPages());
         model.addAttribute("ascending", ascending);

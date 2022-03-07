@@ -15,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -84,17 +83,13 @@ public class SignInUpController {
         User dbUser = optionalUser.get();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (passwordEncoder.matches(password, dbUser.getPassword())) {
-            if (newPassword.equals("")) {
-                dbUser.setFirstName(firstName);
-                dbUser.setLastName(lastName);
-                dbUser.setEmail(email);
-            } else if (newPassword.length() >= 6) {
-                dbUser.setFirstName(firstName);
-                dbUser.setLastName(lastName);
-                dbUser.setEmail(email);
+            if (newPassword.length() >= 6) {
                 String encodedNewPass = passwordEncoder.encode(newPassword);
                 dbUser.setPassword(encodedNewPass);
             }
+            dbUser.setFirstName(firstName);
+            dbUser.setLastName(lastName);
+            dbUser.setEmail(email);
             userRepository.save(dbUser);
         } else {
             model.addAttribute("saveError", true);
