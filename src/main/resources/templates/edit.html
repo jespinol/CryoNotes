@@ -19,6 +19,7 @@
 
     <form th:action="@{|/${currentObject}/save/${editItem.id}|}" th:object="${editItem}" method="post">
         <fieldset>
+            <div class="alert alert-success" th:if="${saveSuccess}">The changes were saved successfully.</div>
             <div class="alert alert-danger" th:if="${saveError}">There was an error while saving the changes, try again.
             </div>
             <div class="mb-3" th:each="attribute: ${attributes}">

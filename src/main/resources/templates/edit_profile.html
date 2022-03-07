@@ -17,29 +17,60 @@
         <div><h2 th:text="|Editing ${#request.userPrincipal.principal.fullName}'s profile|"></h2></div>
     </div>
 
-    <form th:action="@{|/save_profile|}" th:object="${user}" method="post">
+    <form th:action="@{|/save_profile/${user.getId()}|}" th:object="${user}" method="post">
         <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
             <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
         </div>
         <fieldset>
+            <div class="alert alert-success" th:if="${saveSuccess}">The changes were saved successfully.</div>
+            <div class="alert alert-danger" th:if="${saveError}">The current password is needed to save changes.</div>
+            <div><p class="text-danger">Changing profile information will log you out</p></div>
             <div class="mb-3">
-                <label class="form-label">First Name</label>
-                <input class="form-control" th:field="*{firstName}"/>
-                <label class="form-label">Last Name</label>
-                <input class="form-control" th:field="*{lastName}"/>
-                <label class="form-label">email</label>
-                <input class="form-control" th:field="*{email}"/>
-                <label class="form-label">Current password</label>
-                <input class="form-control" type="password" required/>
-                <p th:if="${#fields.hasErrors('password')}" class="alert-danger">Enter your current password to save changes</p>
-                <label class="form-label" th:field="*{password}">New password</label>
-                <input class="form-control" type="password"/>
-                <label class="form-label">Repeat new password</label>
-                <input class="form-control" type="password"/>
+                <div>
+                    <label class="form-label">First Name</label>
+                    <input class="form-control" th:field="*{firstName}"/>
+                </div>
+                <div>
+                    <label class="form-label">Last Name</label>
+                    <input class="form-control" th:field="*{lastName}"/>
+                </div>
+                <div>
+                    <label class="form-label">email</label>
+                    <input class="form-control" th:field="*{email}"/>
+                </div>
+                <div class="divider d-flex align-items-center my-4">
+                    <p class="text-center mx-3 mb-0">To save changes enter your current password</p>
+                </div>
+                <div>
+                    <label class="form-label">Current password</label>
+                    <input class="form-control" type="password" id="currentPass" th:field="*{password}" required/>
+                    <p th:if="${#fields.hasErrors('password')}" class="alert-danger">Enter your current password to save changes</p>
+                </div>
+                <div class="divider d-flex align-items-center my-4">
+                    <p class="text-center mx-3 mb-0">To update your password enter a new password below. Leave blank if not needed.</p>
+                </div>
+                <div>
+                    <label class="form-label">New password</label>
+                    <input class="form-control" id="pass1" type="password" minlength="6" name="newPassword"/>
+                </div>
+                <div>
+                    <label class="form-label">Repeat new password</label>
+                    <input class="form-control" id="pass2" type="password"/>
+                </div>
             </div>
         </fieldset>
         <div>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary" onclick="checkIfPasswordsMatch()">Save changes</button>
+            <script>
+                function checkIfPasswordsMatch() {
+                    if (document.getElementById('pass2').value != document.getElementById('pass1').value) {
+                        document.getElementById('pass2').value = '';
+                        document.getElementById('pass1').value = '';
+                        document.getElementById('currentPass').value = '';
+                        alert('New password must match');
+                    }
+                }
+            </script>
         </div>
     </form>
 </div>

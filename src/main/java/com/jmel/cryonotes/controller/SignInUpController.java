@@ -12,12 +12,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 public class SignInUpController {
@@ -33,7 +32,7 @@ public class SignInUpController {
         return authentication.isAuthenticated();
     }
 
-    @GetMapping(value={"/", "/home"})
+    @GetMapping(value = {"/", "/home"})
     public String viewStartPage() {
         if (isAuthenticated()) {
             return "/home";
@@ -79,26 +78,34 @@ public class SignInUpController {
         return "edit_profile";
     }
 
-//    @PostMapping("/save_profile")
-//    public String saveChangesSimple(@Valid User user, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "/edit_profile";
-//        }
-//        userRepository.save(user);
-//        return "/home";
-//    }
-
-    @PostMapping("/save_profile")
-    public String changeUserPassword(User user, @RequestParam("password") String password, @RequestParam("oldpassword") String oldPassword) {
+    @PostMapping("/save_profile/{id}")
+    public String changeUserPassword(Model model, @PathVariable Long id, @RequestParam(value = "firstName", required = false) String firstName, @RequestParam(value = "lastName", required = false) String lastName, @RequestParam(value = "email", required = false) String email, @RequestParam("password") String password, @RequestParam(value = "newPassword", defaultValue = "") String newPassword) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        User dbUser = optionalUser.get();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        if (passwordEncoder.matches(oldPassword, user.getPassword())) {
-            System.out.println("Passwords matched");
-            String encodedPassword = passwordEncoder.encode(password);
-            user.setPassword(encodedPassword);
-            userRepository.save(user);
+        System.out.println("new pass " + newPassword);
+        if (passwordEncoder.matches(password, dbUser.getPassword())) {
+            if (newPassword.equals("")) {
+                System.out.println("not changing pass");
+                dbUser.setFirstName(firstName);
+                dbUser.setLastName(lastName);
+                dbUser.setEmail(email);
+            } else if (newPassword.length() >= 6) {
+                System.out.println("changing pass");
+                dbUser.setFirstName(firstName);
+                dbUser.setLastName(lastName);
+                dbUser.setEmail(email);
+                String encodedNewPass = passwordEncoder.encode(newPassword);
+                dbUser.setPassword(encodedNewPass);
+            }
+            userRepository.save(dbUser);
         } else {
-            return "/edit_profile";
+            model.addAttribute("saveError", true);
+            return edit(model);
         }
-        return "/home";
+        System.out.println("trying to log out");
+        SecurityContextHolder.getContext().setAuthentication(null);
+        model.addAttribute("saveSuccess", true);
+        return "redirect:/home";
     }
 }
