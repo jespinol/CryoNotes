@@ -1,30 +1,29 @@
 # CryoNotes: A web-based science note-taking app for cryoEM experiments
 
 ## Overview
-
 CryoEM is a widely used technique for protein structure determination, and it has become in recent times the preferred
 method for structural studies in our and other labs. Despite monumental advances in data collection and sample
 processing methods, the data processing workflows used for specific projects vary greatly, even within the same lab.
 <br/>
 <br/>
 The goal of this project is to create a web-based app to keep track of data collection parameters, data processing
-parameters, and results of different cryoEM projects. My expectation is that having that information in a central
+parameters, and results of different cryoEM experiments. My expectation is that having that information in a central
 location will aid in planning and executing cryoEM experiments.
 
 ## Features
-
-Create users: an admin-level user (lab manager or principal investigator) will be able to create new users.<br/>
-User login: users will be able to log in with a username and password and 2-step authentication.<br/>
-CRUD: users will be able to create new projects, add details from different experiments related to a project. Authorized
-users will be able to delete experiments/projects when needed.<br/>
-View and compare data: users will be able to view data from one project or from different projects related to the same
-sample.
+User authentication: A new user can create an account with their information. A valid user must log in to access the app.<br/>
+Update user profile: An authenticated user can change their names, email, and/or password by.<br/>
+Record information: Different steps of a cryoEM experiment are separated into pages. The user can access those pages and record information related to each step.<br/>
+View and edit information: The user has a sortable summary view with all the entries in table form. The number of rows can be changed. The user can select one entry to view additonal information for that entry and, if desired, edit it.<br/> 
+Compare information: The user can select multiple entries from the table view and compare all the data side by side.<br/>
+Search: The user can search a keyword across any field, or use the advance search feature where they can look for specific keywords in chosen fields.<br/> 
 
 ## Technologies
-
 Java<br/>
+Spring Boot <br/>
+Thymeleaf<br/>
 HTML<br/>
-SQL<br/>
 CSS<br/>
-Thymeleaf templates<br/>
 Bootstrap
+mySQL<br/>
+Microsoft Azure
