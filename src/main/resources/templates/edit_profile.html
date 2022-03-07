@@ -24,7 +24,7 @@
         <fieldset>
             <div class="alert alert-success" th:if="${saveSuccess}">The changes were saved successfully.</div>
             <div class="alert alert-danger" th:if="${saveError}">The current password is needed to save changes.</div>
-            <div><p class="text-danger">Changing profile information will log you out. This feature is under testing.</p></div>
+            <div><p class="text-danger">Changing profile information will log you out.</p></div>
             <div class="mb-3">
                 <div>
                     <label class="form-label">First Name</label>
@@ -68,6 +68,8 @@
                         document.getElementById('pass1').value = '';
                         document.getElementById('currentPass').value = '';
                         alert('New password must match');
+                    } else {
+                        confirm('Save changes? You will be logged out after saving.');
                     }
                 }
             </script>
