@@ -1,6 +1,6 @@
 # CryoNotes: A web-based science note-taking app for cryoEM experiments
 
-### Web app live [here](http://cryonotes.ue.r.appspot.com )
+### ~~Web app live [here](http://cryonotes.ue.r.appspot.com )~~
 
 ## Overview
 CryoEM is a widely used technique for protein structure determination, and it has become in recent times the preferred
